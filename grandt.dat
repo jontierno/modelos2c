@@ -1,0 +1,9 @@
+data;
+
+set FORMACIONES = 1 2 3;
+set POSICIONES = "ARQ" "DEF" "VOL" "DEL"
+
+param 
+
+
+end;
