@@ -36,6 +36,14 @@ set EQUIPOS dimen 1 := setof{(i,j,k) in JUGADORES}(k);
 
 
 param PUESTOS 'el jugador juega de' {(i,j,k) in JUGADORES, m in POSICIONES} := if j = m then 1 else 0 binary;
+
+param PUNTAJES_BASICOS {(i,j,k) in JUGADORES, l in FECHAS} := if l = 1 then PUNTAJES1[i,j,k] else 
+if l = 2 then PUNTAJES2[i,j,k] else if l = 3 then PUNTAJES3[i,j,k] else if l = 4 then PUNTAJES4[i,j,k] else 
+if l = 5 then PUNTAJES5[i,j,k] else if l = 6 then PUNTAJES6[i,j,k] else if l = 7 then PUNTAJES7[i,j,k] else 
+if l = 8 then PUNTAJES8[i,j,k] else if l = 9 then PUNTAJES9[i,j,k] else if l = 10 then PUNTAJES10[i,j,k] else 
+if l = 11 then PUNTAJES11[i,j,k] else if l = 12 then PUNTAJES12[i,j,k] else if l = 13 then PUNTAJES13[i,j,k] else 
+if l = 14 then PUNTAJES14[i,j,k] else PUNTAJES15[i,j,k];
+
 printf: "\n****** Han sido leidos %i jugadores ****** \n", card (JUGADORES);
 printf: "****** Han sido leidos %i equipos     ****** \n", card (EQUIPOS);
 printf: "****** Han sido leidas %i posiciones   ****** \n\n", card (POSICIONES);
@@ -46,9 +54,8 @@ var TITULARES{(i,j,k) in JUGADORES, l in FECHAS}, binary;
 
 var xi >= 0;
 
-minimize z : xi;
 
-#maximize z: sum {i JUGADORES} sum{j in FECHAS} (PUNTOS_BASICOS[i, j] * TITULARES[i,j]) ;
+maximize z: sum {(i,j,k) in JUGADORES, l in FECHAS} (PUNTAJES_BASICOS[i, j, k, l] * TITULARES[i,j,k,l]) ;
 
 
 
