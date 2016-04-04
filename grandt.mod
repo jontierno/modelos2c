@@ -4,6 +4,8 @@
 set FECHAS;
 set FORMACIONES;
 param MAXPRESUPUESTO;	
+param MULTIPLICADORCAPITAN;
+
 set JUGADORES dimen 3;
 
 param COTIZACIONES 'el jugador cotiza' {(i,j,k) in JUGADORES};
@@ -25,18 +27,21 @@ param PUNTAJES15 'el jugador en la fecha 15 puntuó' {(i,j,k) in JUGADORES};
 
 
 
+#leo los datos del csv
 table resultados IN "CSV" "GranDT2015_formatted.csv": JUGADORES <- [Jugador,Puesto,Equipo], COTIZACIONES~Cotizacion,
 PUNTAJES1~F1, PUNTAJES2~F2, PUNTAJES3~F3, PUNTAJES4~F4, PUNTAJES5~F5, PUNTAJES6~F6, PUNTAJES7~F7, 
 PUNTAJES8~F8, PUNTAJES9~F9, PUNTAJES10~F10, PUNTAJES11~F11, PUNTAJES12~F12, PUNTAJES13~F13, PUNTAJES14~F14, 
 PUNTAJES15~F15;
 
 
+#extraigo los equipos y las posiciones
 set POSICIONES dimen 1 := setof{(i,j,k) in JUGADORES}(j);
 set EQUIPOS dimen 1 := setof{(i,j,k) in JUGADORES}(k);
 
-
+#El jugador i,j,k juega en la posicion m
 param PUESTOS 'el jugador juega de' {(i,j,k) in JUGADORES, m in POSICIONES} := if j = m then 1 else 0 binary;
 
+#Puntaje por fecha
 param PUNTAJES_BASICOS {(i,j,k) in JUGADORES, l in FECHAS} := if l = 1 then PUNTAJES1[i,j,k] else 
 if l = 2 then PUNTAJES2[i,j,k] else if l = 3 then PUNTAJES3[i,j,k] else if l = 4 then PUNTAJES4[i,j,k] else 
 if l = 5 then PUNTAJES5[i,j,k] else if l = 6 then PUNTAJES6[i,j,k] else if l = 7 then PUNTAJES7[i,j,k] else 
@@ -49,13 +54,17 @@ printf: "****** Han sido leidos %i equipos     ****** \n", card (EQUIPOS);
 printf: "****** Han sido leidas %i posiciones   ****** \n\n", card (POSICIONES);
 
 
+#Binaria que indica si el jugador pertenece al equipo (1)
 var EQUIPO{(i,j,k) in JUGADORES}, binary;
+
+#Binaria que indica si el jugador (i,j,k) es titular en la fecha (l)
 var TITULARES{(i,j,k) in JUGADORES, l in FECHAS}, binary;
 
-var xi >= 0;
+#Binaria que indica el capitan por fecha.
+var CAPITAN{(i,j,k) in JUGADORES, l in FECHAS}, binary;
 
 
-maximize z: sum {(i,j,k) in JUGADORES, l in FECHAS} (PUNTAJES_BASICOS[i, j, k, l] * TITULARES[i,j,k,l]) ;
+maximize z: sum {(i,j,k) in JUGADORES, l in FECHAS} (PUNTAJES_BASICOS[i, j, k, l] * (TITULARES[i,j,k,l] + CAPITAN[i,j,k,l])) ;
 
 
 
@@ -65,9 +74,11 @@ s.t. CONDEQUIPO{(i,j,k) in JUGADORES, l in FECHAS}:  TITULARES[i,j,k,l] <= EQUIP
 #el equipo no puede tener ni mas ni menos de 15 jugadores
 s.t. CONDGRUPO: sum{(i,j,k) in JUGADORES} EQUIPO[i,j,k] = 15;
 
+#no puedo sobrepasar el presupuesto
 s.t. CONDMAXIMOPRESUPUESTO: sum{(i,j,k) in JUGADORES} EQUIPO[i,j,k] * COTIZACIONES[i,j,k] <= MAXPRESUPUESTO;
 
-
+#un capitan por fecha
+s.t. CONDCAPITAN {l in FECHAS}: sum{(i,j,k) in JUGADORES} CAPITAN[i,j,k] = 1;
 
 
 
