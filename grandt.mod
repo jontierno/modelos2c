@@ -5,7 +5,7 @@ set FECHAS;
 set FORMACIONES;
 param MAXPRESUPUESTO;	
 param MULTIPLICADORCAPITAN;
-
+param MAXIMOPOREQUIPO;
 set JUGADORES dimen 3;
 
 param COTIZACIONES 'el jugador cotiza' {(i,j,k) in JUGADORES};
@@ -39,7 +39,11 @@ set POSICIONES dimen 1 := setof{(i,j,k) in JUGADORES}(j);
 set EQUIPOS dimen 1 := setof{(i,j,k) in JUGADORES}(k);
 
 #El jugador i,j,k juega en la posicion m
-param PUESTOS 'el jugador juega de' {(i,j,k) in JUGADORES, m in POSICIONES} := if j = m then 1 else 0 binary;
+param JUEGADE 'el jugador juega de' {(i,j,k) in JUGADORES, m in POSICIONES} := if j = m then 1 else 0 binary;
+
+#El jugador i,j,k juega en el equipo e
+param JUEGAEN 'el jugador juega en' {(i,j,k) in JUGADORES, e in EQUIPOS} := if k = e then 1 else 0 binary;
+
 
 #Puntaje por fecha
 param PUNTAJES_BASICOS {(i,j,k) in JUGADORES, l in FECHAS} := if l = 1 then PUNTAJES1[i,j,k] else 
@@ -78,9 +82,10 @@ s.t. CONDGRUPO: sum{(i,j,k) in JUGADORES} EQUIPO[i,j,k] = 15;
 s.t. CONDMAXIMOPRESUPUESTO: sum{(i,j,k) in JUGADORES} EQUIPO[i,j,k] * COTIZACIONES[i,j,k] <= MAXPRESUPUESTO;
 
 #un capitan por fecha
-s.t. CONDCAPITAN {l in FECHAS}: sum{(i,j,k) in JUGADORES} CAPITAN[i,j,k] = 1;
+s.t. CONDCAPITAN {l in FECHAS}: sum{(i,j,k) in JUGADORES} CAPITAN[i,j,k,l] = 1;
 
-
+#no puedo tener mas de MAXIMOPOREQUIPO jugadores  de un mismo equipo
+s.t. CONDJUGADORESPOREQUIPO {e in EQUIPOS}: sum{(i,j,k) in JUGADORES} JUEGAEN[i,j,k,e] * EQUIPO[i,j,k] <= MAXIMOPOREQUIPO; 
 
 
 
