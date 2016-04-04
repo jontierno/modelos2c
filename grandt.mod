@@ -1,11 +1,11 @@
 
-# conjunto de jugadores y fechas;
-
 set FECHAS;
 set FORMACIONES;
 param MAXPRESUPUESTO;	
 param MULTIPLICADORCAPITAN;
 param MAXIMOPOREQUIPO;
+
+
 set JUGADORES dimen 3;
 
 param COTIZACIONES 'el jugador cotiza' {(i,j,k) in JUGADORES};
@@ -38,6 +38,9 @@ PUNTAJES15~F15;
 set POSICIONES dimen 1 := setof{(i,j,k) in JUGADORES}(j);
 set EQUIPOS dimen 1 := setof{(i,j,k) in JUGADORES}(k);
 
+#defino cuantos jugadores maximos por posicion por la formacion seleccionada
+param JUGADORESPORFORMACION {p in POSICIONES, f in FORMACIONES};
+
 #El jugador i,j,k juega en la posicion m
 param JUEGADE 'el jugador juega de' {(i,j,k) in JUGADORES, m in POSICIONES} := if j = m then 1 else 0 binary;
 
@@ -61,11 +64,15 @@ printf: "****** Han sido leidas %i posiciones   ****** \n\n", card (POSICIONES);
 #Binaria que indica si el jugador pertenece al equipo (1)
 var EQUIPO{(i,j,k) in JUGADORES}, binary;
 
-#Binaria que indica si el jugador (i,j,k) es titular en la fecha (l)
+#Binaria que indica si el jugador (i,j,k) es titular (1) en la fecha (l)
 var TITULARES{(i,j,k) in JUGADORES, l in FECHAS}, binary;
 
-#Binaria que indica el capitan por fecha.
+#Binaria que indica el capitan por fecha (1).
 var CAPITAN{(i,j,k) in JUGADORES, l in FECHAS}, binary;
+
+#Binaria que indica la formación seleccionada (1)
+var FORMACIONSEL {f in FORMACIONES}, binary;
+
 
 
 maximize z: sum {(i,j,k) in JUGADORES, l in FECHAS} (PUNTAJES_BASICOS[i, j, k, l] * (TITULARES[i,j,k,l] + CAPITAN[i,j,k,l])) ;
@@ -84,9 +91,18 @@ s.t. CONDMAXIMOPRESUPUESTO: sum{(i,j,k) in JUGADORES} EQUIPO[i,j,k] * COTIZACION
 #un capitan por fecha
 s.t. CONDCAPITAN {l in FECHAS}: sum{(i,j,k) in JUGADORES} CAPITAN[i,j,k,l] = 1;
 
+#el capitan no puede serlo si no es titular en la fecha
+s.t. CONDTITULARCAP {(i,j,k) in JUGADORES, l in FECHAS}: CAPITAN[i,j,k,l] <= TITULARES[i,j,k,l];
+
 #no puedo tener mas de MAXIMOPOREQUIPO jugadores  de un mismo equipo
 s.t. CONDJUGADORESPOREQUIPO {e in EQUIPOS}: sum{(i,j,k) in JUGADORES} JUEGAEN[i,j,k,e] * EQUIPO[i,j,k] <= MAXIMOPOREQUIPO; 
 
+#en cada fecha hay que respetar la formacion
+s.t. CONDFORMACION {l in FECHAS, p in POSICIONES}: 
+		sum{(i,j,k) in JUGADORES} (JUEGADE[i,j,k,p] * TITULARES [i,j,k,l]) = 
+		sum{f in FORMACIONES} JUGADORESPORFORMACION[p, f] * FORMACIONSEL[f];
 
+#solo una formacion seleccionada
+s.t. CONDUNAFORMACION: sum{f in FORMACIONES} FORMACIONSEL[f] = 1;
 
 end;
