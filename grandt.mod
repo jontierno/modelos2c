@@ -3,7 +3,7 @@
 
 set FECHAS;
 set FORMACIONES;
-param MAXPRESUPUESTO;
+param MAXPRESUPUESTO;	
 set JUGADORES dimen 3;
 
 param COTIZACIONES 'el jugador cotiza' {(i,j,k) in JUGADORES};
@@ -60,12 +60,12 @@ maximize z: sum {(i,j,k) in JUGADORES, l in FECHAS} (PUNTAJES_BASICOS[i, j, k, l
 
 
 #un jugador no puede ser titular en una fecha si no es del equipo.
-s.t. COND{(i,j,k) in JUGADORES, l in FECHAS}:  TITULARES[i,j,k,l] <= EQUIPO[i,j,k];
+s.t. CONDEQUIPO{(i,j,k) in JUGADORES, l in FECHAS}:  TITULARES[i,j,k,l] <= EQUIPO[i,j,k];
 
 #el equipo no puede tener ni mas ni menos de 15 jugadores
-s.t. MAXEQUIPO: sum{(i,j,k) in JUGADORES} EQUIPO[i,j,k] = 15;
+s.t. CONDGRUPO: sum{(i,j,k) in JUGADORES} EQUIPO[i,j,k] = 15;
 
-s.t. MAXIMOPRESUPUESTO: sum{(i,j,k) in JUGADORES} EQUIPO[i,j,k] * COTIZACIONES[i,j,k] <= MAXPRESUPUESTO;
+s.t. CONDMAXIMOPRESUPUESTO: sum{(i,j,k) in JUGADORES} EQUIPO[i,j,k] * COTIZACIONES[i,j,k] <= MAXPRESUPUESTO;
 
 
 
