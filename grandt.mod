@@ -85,6 +85,9 @@ s.t. CONDEQUIPO{(i,j,k) in JUGADORES, l in FECHAS}:  TITULARES[i,j,k,l] <= EQUIP
 #el equipo no puede tener ni mas ni menos de 15 jugadores
 s.t. CONDGRUPO: sum{(i,j,k) in JUGADORES} EQUIPO[i,j,k] = 15;
 
+#el equipo no puede tener ni mas ni menos de 11 titulares por fecha
+s.t. CONDTITULARES{f in FECHAS}: sum{(i,j,k) in JUGADORES} TITULARES[i,j,k,f] = 11;
+
 #no puedo sobrepasar el presupuesto
 s.t. CONDMAXIMOPRESUPUESTO: sum{(i,j,k) in JUGADORES} EQUIPO[i,j,k] * COTIZACIONES[i,j,k] <= MAXPRESUPUESTO;
 
