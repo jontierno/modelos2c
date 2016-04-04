@@ -3,7 +3,7 @@
 
 set FECHAS;
 set FORMACIONES;
-
+param MAXPRESUPUESTO;
 set JUGADORES dimen 3;
 
 param COTIZACIONES 'el jugador cotiza' {(i,j,k) in JUGADORES};
@@ -65,6 +65,7 @@ s.t. COND{(i,j,k) in JUGADORES, l in FECHAS}:  TITULARES[i,j,k,l] <= EQUIPO[i,j,
 #el equipo no puede tener ni mas ni menos de 15 jugadores
 s.t. MAXEQUIPO: sum{(i,j,k) in JUGADORES} EQUIPO[i,j,k] = 15;
 
+s.t. MAXIMOPRESUPUESTO: sum{(i,j,k) in JUGADORES} EQUIPO[i,j,k] * COTIZACIONES[i,j,k] <= MAXPRESUPUESTO;
 
 
 
