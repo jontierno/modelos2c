@@ -4,7 +4,7 @@ set FORMACIONES;
 param MAXPRESUPUESTO;	
 param MULTIPLICADORCAPITAN;
 param MAXIMOPOREQUIPO;
-
+param SUPLENTESPORPUESTO;
 
 set JUGADORES dimen 3;
 
@@ -72,10 +72,10 @@ var CAPITAN{(i,j,k) in JUGADORES, l in FECHAS}, binary;
 
 #Binaria que indica la formación seleccionada (1)
 var FORMACIONSEL {f in FORMACIONES}, binary;
+#puntaje obtenido por fecha;
+var PUNTAJEOBTENIDO{f in FECHAS} >= 0;
 
-
-
-maximize z: sum {(i,j,k) in JUGADORES, l in FECHAS} (PUNTAJES_BASICOS[i, j, k, l] * (TITULARES[i,j,k,l] + CAPITAN[i,j,k,l])) ;
+maximize z: sum {f in FECHAS} PUNTAJEOBTENIDO [f] ;
 
 
 
@@ -105,7 +105,43 @@ s.t. CONDFORMACION {l in FECHAS, p in POSICIONES}:
 		sum{(i,j,k) in JUGADORES} (JUEGADE[i,j,k,p] * TITULARES [i,j,k,l]) = 
 		sum{f in FORMACIONES} JUGADORESPORFORMACION[p, f] * FORMACIONSEL[f];
 
+#por puesto tiene que haber SUPLENTESPORPUESTO suplentes.
+s.t. CONDSUPLENTES {p in POSICIONES}: 
+		sum{(i,j,k) in JUGADORES} (JUEGADE[i,j,k,p] * EQUIPO[i,j,k]) = 
+		sum{f in FORMACIONES} (JUGADORESPORFORMACION[p, f] + SUPLENTESPORPUESTO)* FORMACIONSEL[f] ;
+
 #solo una formacion seleccionada
 s.t. CONDUNAFORMACION: sum{f in FORMACIONES} FORMACIONSEL[f] = 1;
 
+#armo una variable de puntaje por fecha para poder expresarlo mas facil
+s.t. CONDPUNTAJEPORFECHA{f in FECHAS}: PUNTAJEOBTENIDO[f] = sum {(i,j,k) in JUGADORES} (PUNTAJES_BASICOS[i, j, k, f] * (TITULARES[i,j,k,f] + CAPITAN[i,j,k,f])); 
+solve;
+
+
+#Impresión de la salida.
+printf "\n***** EL PUNTAJE OBTENIDO ES %i *****\n", z;
+for {i in FORMACIONES: FORMACIONSEL[i] = 1}
+{
+	printf "\n***** LA FORMACIÓN SELECCIONADA ES %s *****\n",i;
+}
+printf "\n***** EQUIPO SELECCIONADO *****\n";
+for {(i,j,k) in JUGADORES: EQUIPO[i,j,k] = 1}
+{ 
+	  printf "%s, Posición: %s, Equipo: %s \n", i,j,k;
+
+}
+
+printf "\n***** DATOS POR FECHA *****\n\n";
+
+for {f in FECHAS} 
+{
+	printf "********** FECHA %i **********\n", f;
+	printf "JUGADORES: \n";
+	for {(i,j,k) in JUGADORES: TITULARES[i,j,k,f] = 1}
+	{ 
+	  printf "	%s, Posición: %s, Equipo: %s \n", i,j,k;
+	}
+
+	printf "\nPUNTAJE OBTENIDO: %i\n\n", PUNTAJEOBTENIDO[f]; 
+}
 end;
