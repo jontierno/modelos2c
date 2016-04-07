@@ -120,6 +120,10 @@ solve;
 
 #Impresión de la salida.
 printf "\n***** EL PUNTAJE OBTENIDO ES %i *****\n", z;
+
+printf "\n***** LA COTIZACIÓN TOTAL ES %i *****\n", sum{(i,j,k) in JUGADORES} EQUIPO[i,j,k] * COTIZACIONES[i,j,k];
+
+
 for {i in FORMACIONES: FORMACIONSEL[i] = 1}
 {
 	printf "\n***** LA FORMACIÓN SELECCIONADA ES %s *****\n",i;
@@ -141,6 +145,12 @@ for {f in FECHAS}
 	{ 
 	  printf "	%s, Posición: %s, Equipo: %s \n", i,j,k;
 	}
+
+	for {(i,j,k) in JUGADORES: CAPITAN[i,j,k,f] = 1}
+	{ 
+	  printf "\n El Capitan es %s %s %s\n", i,j,k;
+	}
+
 
 	printf "\nPUNTAJE OBTENIDO: %i\n\n", PUNTAJEOBTENIDO[f]; 
 }
