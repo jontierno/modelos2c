@@ -79,8 +79,8 @@ var FORMACIONSEL {f in FORMACIONES}, binary;
 #puntaje obtenido por fecha;
 var PUNTAJEOBTENIDO{f in FECHAS} >= 0;
 
-#el jugador continua en el equipo entre la fecha i y la fecha i+1
-var CONTINUAENEQUIPO{(i,j,k) in JUGADORES, l in FECHAS: l < CANTFECHAS}, binary;
+#el jugador entra entre la fecha l y l +1 al equipo
+var ENTRAENEQUIPO{(i,j,k) in JUGADORES, l in FECHAS: l < CANTFECHAS}, binary;
 
 
 maximize z: sum {f in FECHAS} PUNTAJEOBTENIDO [f] ;
@@ -114,17 +114,21 @@ s.t. CONDFORMACION {l in FECHAS, p in POSICIONES}:
 		sum{f in FORMACIONES} JUGADORESPORFORMACION[p, f] * FORMACIONSEL[f];
 
 
-#setea 1 si un jugador se mantiene en el grupo entre fechas y fechas.
+#
 
-s.t. CONDMANTIENETITULARIDADUPPER{(i,j,k) in JUGADORES, l in FECHAS: l < CANTFECHAS}: 
-		2*CONTINUAENEQUIPO[i,j,k,l] <= EQUIPO[i,j,k,l] +EQUIPO[i,j,k,l+1];
+s.t. CONDNOJUEGASINOESTABAYNOENTRA{(i,j,k) in JUGADORES, l in FECHAS: l < CANTFECHAS}: 
+		 EQUIPO[i,j,k,l+1] <= EQUIPO[i,j,k,l] + ENTRAENEQUIPO[i,j,k,l];
 
-s.t. CONDMANTIENETITULARIDADDOWN{(i,j,k) in JUGADORES, l in FECHAS: l < CANTFECHAS}:  
-	 EQUIPO[i,j,k,l] +EQUIPO[i,j,k,l+1] <= 1 + CONTINUAENEQUIPO[i,j,k,l];
+s.t. CONDNOENTRA{(i,j,k) in JUGADORES, l in FECHAS: l < CANTFECHAS}:  
+	 EQUIPO[i,j,k,l+1] >= ENTRAENEQUIPO[i,j,k,l];
 
-#se mantienen al menos TAMEQUIPO - MAXIMATRANSFERENCIASPORFECHA jugadores entre fecha y fecha
+s.t. CONDNOENTRASIESTAENAMBASFECHAS{(i,j,k) in JUGADORES, l in FECHAS: l < CANTFECHAS}:  
+	 2 - EQUIPO[i,j,k,l] - EQUIPO[i,j,k,l+1] >= ENTRAENEQUIPO[i,j,k,l];
+
+
+#En el equipo no pueden entrar mas jugadores que MAXIMATRANSFERENCIASPORFECHA
 s.t. CONDMAXIMASTRANSFERENCIASPORFECHA{l in FECHAS: l < CANTFECHAS}:  
-		sum {(i,j,k) in JUGADORES} (CONTINUAENEQUIPO[i,j,k,l]) >= TAMEQUIPO - MAXIMATRANSFERENCIASPORFECHA;
+		sum {(i,j,k) in JUGADORES} (ENTRAENEQUIPO[i,j,k,l]) <= MAXIMATRANSFERENCIASPORFECHA;
 
 #por puesto tiene que haber SUPLENTESPORPUESTO suplentes.
 s.t. CONDSUPLENTES {p in POSICIONES, l in FECHAS}: 
@@ -167,10 +171,10 @@ for {f in FECHAS}
 	printf "EQUIPO SELECCIONADO: \n";
 	for {(i,j,k) in JUGADORES: EQUIPO[i,j,k,f] = 1}
 	{ 
-	  printf "%s, Posición: %s, Equipo: %s \n", i,j,k;
+	  printf " %s, Posición: %s, Equipo: %s \n", i,j,k;
 
 	}
-	printf "TITULARES: \n";
+	printf "\n\nTITULARES: \n";
 	for {(i,j,k) in JUGADORES: TITULARES[i,j,k,f] = 1}
 	{ 
 	  printf "	%s, Posición: %s, Equipo: %s \n", i,j,k;
@@ -180,14 +184,22 @@ for {f in FECHAS}
 	{ 
 	  printf "\n El Capitan es %s %s %s\n", i,j,k;
 	}
-	printf "TRANSFERENCIAS ENTRANTES: \n";
-	for {(i,j,k) in JUGADORES: f < card(FECHAS) && EQUIPO[i,j,k,f] = 0 && EQUIPO[i,j,k,f + 1] = 1}
+	
+	for {i in 1..1: f > 1}
+	{ 
+	 printf "\nJUGADORES QUE ENTRARON EN ESTA FECHA: \n"; 
+	}
+	
+	for {(i,j,k) in JUGADORES: f > 1 && EQUIPO[i,j,k,f-1] = 0 && EQUIPO[i,j,k,f] = 1}
 	{ 
 	  printf "	%s, Posición: %s, Equipo: %s \n", i,j,k;
 	}
 
-	printf "TRANSFERENCIAS SALIENTES: \n";
-	for {(i,j,k) in JUGADORES: f < card(FECHAS) && EQUIPO[i,j,k,f] = 1 && EQUIPO[i,j,k,f + 1] = 0}
+	for {i in 1..1: f < CANTFECHAS}
+	{ 
+	 printf "\nJUGADORES QUE SALIERON EN ESTA FECHA: \n"; 
+	}
+	for {(i,j,k) in JUGADORES: f < CANTFECHAS && EQUIPO[i,j,k,f] = 1 && EQUIPO[i,j,k,f + 1] = 0}
 	{ 
 	  printf "	%s, Posición: %s, Equipo: %s \n", i,j,k;
 	}

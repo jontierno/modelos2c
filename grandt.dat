@@ -13,7 +13,8 @@ VOL 4 3 4
 DEL 2 3 3;
 
 param MAXIMATRANSFERENCIASPORFECHA := 4;
-param SUPLENTESPORPUESTO := 1;
+param SUPLENTESPORPUESTO := 1; 	# esto suma 4*SUPLENTESPORPUESTO suplentes
+
 #table datos IN "CSV" "GranDT2015_formatted.csv": M <- [DESDE,HACIA], d~DISTANCIA,c~COSTO;
 param TAMEQUIPO := 15;
 
