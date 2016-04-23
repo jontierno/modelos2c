@@ -5,8 +5,10 @@ param MAXPRESUPUESTO;
 param MULTIPLICADORCAPITAN;
 param MAXIMOPOREQUIPO;
 param SUPLENTESPORPUESTO;
-param TAMEQUIPO;
 param MAXIMATRANSFERENCIASPORFECHA;
+param SUPLENTESLIBRES;
+
+param TAMEQUIPO := 11+ SUPLENTESPORPUESTO *4 + SUPLENTESLIBRES;
 set JUGADORES dimen 3;
 
 param COTIZACIONES 'el jugador cotiza' {(i,j,k) in JUGADORES};
@@ -82,7 +84,8 @@ var PUNTAJEOBTENIDO{f in FECHAS} >= 0;
 #el jugador entra entre la fecha l y l +1 al equipo
 var ENTRAENEQUIPO{(i,j,k) in JUGADORES, l in FECHAS: l < CANTFECHAS}, binary;
 
-
+#
+var SULPLENTESLIBRESENPOSICION {p in POSICIONES}, binary;
 maximize z: sum {f in FECHAS} PUNTAJEOBTENIDO [f] ;
 
 
@@ -130,10 +133,13 @@ s.t. CONDNOENTRASIESTAENAMBASFECHAS{(i,j,k) in JUGADORES, l in FECHAS: l < CANTF
 s.t. CONDMAXIMASTRANSFERENCIASPORFECHA{l in FECHAS: l < CANTFECHAS}:  
 		sum {(i,j,k) in JUGADORES} (ENTRAENEQUIPO[i,j,k,l]) <= MAXIMATRANSFERENCIASPORFECHA;
 
+#en cada fecha solo se pueden asignar mas suplentes como SUPLENTESLIBRES se indiquen
+s.t. CONDMAXSUMPLENTESLIBRES: sum{p in POSICIONES} SULPLENTESLIBRESENPOSICION[p] = SUPLENTESLIBRES;
+
 #por puesto tiene que haber SUPLENTESPORPUESTO suplentes.
 s.t. CONDSUPLENTES {p in POSICIONES, l in FECHAS}: 
 		sum{(i,j,k) in JUGADORES} (JUEGADE[i,j,k,p] * EQUIPO[i,j,k,l]) = 
-		sum{f in FORMACIONES} (JUGADORESPORFORMACION[p, f] + SUPLENTESPORPUESTO)* FORMACIONSEL[f] ;
+		sum{f in FORMACIONES} (JUGADORESPORFORMACION[p, f] + SUPLENTESPORPUESTO)* FORMACIONSEL[f] + SULPLENTESLIBRESENPOSICION[p];
 
 
 
@@ -147,14 +153,13 @@ PUNTAJEOBTENIDO[f] = sum {(i,j,k) in JUGADORES} (PUNTAJES_BASICOS[i, j, k, f] * 
 solve;
 
 
-
 #Máximo 
 
 
 #Impresión de la salida.
 printf "\n***** EL PUNTAJE OBTENIDO ES %i *****\n", z;
 
-#printf "\n***** LA COTIZACIÓN TOTAL ES %i *****\n", sum{(i,j,k) in JUGADORES} EQUIPO[i,j,k] * COTIZACIONES[i,j,k];
+
 
 
 for {i in FORMACIONES: FORMACIONSEL[i] = 1}
@@ -174,6 +179,8 @@ for {f in FECHAS}
 	  printf " %s, Posición: %s, Equipo: %s \n", i,j,k;
 
 	}
+
+	printf "\nCOTIZACIÓN %i\n", sum{(i,j,k) in JUGADORES} EQUIPO[i,j,k,f] * COTIZACIONES[i,j,k];
 	printf "\n\nTITULARES: \n";
 	for {(i,j,k) in JUGADORES: TITULARES[i,j,k,f] = 1}
 	{ 
@@ -204,5 +211,13 @@ for {f in FECHAS}
 	  printf "	%s, Posición: %s, Equipo: %s \n", i,j,k;
 	}
 	printf "\nPUNTAJE OBTENIDO: %i\n\n", PUNTAJEOBTENIDO[f]; 
+
 }
+	printf "\nHAY MAS SUPLENTES EN: "; 	
+	for {p in POSICIONES: SULPLENTESLIBRESENPOSICION[p] = 1}
+	{ 
+	  printf "%s\n", p;
+
+	}
+
 end;
