@@ -61,8 +61,8 @@ printf: "****** Han sido leidos %i equipos     ****** \n", card (EQUIPOS);
 printf: "****** Han sido leidas %i posiciones   ****** \n\n", card (POSICIONES);
 
 
-#Binaria que indica si el jugador pertenece al equipo (1)
-var EQUIPO{(i,j,k) in JUGADORES}, binary;
+#Binaria que indica si el jugador pertenece al equipo una fecha (1)
+var EQUIPO{(i,j,k) in JUGADORES, l in FECHAS}, binary;
 
 #Binaria que indica si el jugador (i,j,k) es titular (1) en la fecha (l)
 var TITULARES{(i,j,k) in JUGADORES, l in FECHAS}, binary;
@@ -80,16 +80,16 @@ maximize z: sum {f in FECHAS} PUNTAJEOBTENIDO [f] ;
 
 
 #un jugador no puede ser titular en una fecha si no es del equipo.
-s.t. CONDEQUIPO{(i,j,k) in JUGADORES, l in FECHAS}:  TITULARES[i,j,k,l] <= EQUIPO[i,j,k];
+s.t. CONDEQUIPO{(i,j,k) in JUGADORES, l in FECHAS}:  TITULARES[i,j,k,l] <= EQUIPO[i,j,k, l];
 
 #el equipo no puede tener ni mas ni menos de 15 jugadores
-s.t. CONDGRUPO: sum{(i,j,k) in JUGADORES} EQUIPO[i,j,k] = TAMEQUIPO;
+s.t. CONDGRUPO{l in FECHAS}: sum{(i,j,k) in JUGADORES} EQUIPO[i,j,k,l] = TAMEQUIPO;
 
 #el equipo no puede tener ni mas ni menos de 11 titulares por fecha
 s.t. CONDTITULARES{f in FECHAS}: sum{(i,j,k) in JUGADORES} TITULARES[i,j,k,f] = 11;
 
-#no puedo sobrepasar el presupuesto
-s.t. CONDMAXIMOPRESUPUESTO: sum{(i,j,k) in JUGADORES} EQUIPO[i,j,k] * COTIZACIONES[i,j,k] <= MAXPRESUPUESTO;
+#no puedo sobrepasar el presupuesto en ninguna fecha
+s.t. CONDMAXIMOPRESUPUESTO {l in FECHAS}: sum{(i,j,k) in JUGADORES} EQUIPO[i,j,k,l] * COTIZACIONES[i,j,k] <= MAXPRESUPUESTO;
 
 #un capitan por fecha
 s.t. CONDCAPITAN {l in FECHAS}: sum{(i,j,k) in JUGADORES} CAPITAN[i,j,k,l] = 1;
@@ -97,8 +97,11 @@ s.t. CONDCAPITAN {l in FECHAS}: sum{(i,j,k) in JUGADORES} CAPITAN[i,j,k,l] = 1;
 #el capitan no puede serlo si no es titular en la fecha
 s.t. CONDTITULARCAP {(i,j,k) in JUGADORES, l in FECHAS}: CAPITAN[i,j,k,l] <= TITULARES[i,j,k,l];
 
-#no puedo tener mas de MAXIMOPOREQUIPO jugadores  de un mismo equipo
-s.t. CONDJUGADORESPOREQUIPO {e in EQUIPOS}: sum{(i,j,k) in JUGADORES} JUEGAEN[i,j,k,e] * EQUIPO[i,j,k] <= MAXIMOPOREQUIPO; 
+#no puedo tener mas de MAXIMOPOREQUIPO jugadores  de un mismo equipo en ninguna fecha
+s.t. CONDJUGADORESPOREQUIPO {e in EQUIPOS, l in FECHAS}: sum{(i,j,k) in JUGADORES} JUEGAEN[i,j,k,e] * EQUIPO[i,j,k,l] <= MAXIMOPOREQUIPO; 
+
+
+
 
 #en cada fecha hay que respetar la formacion
 s.t. CONDFORMACION {l in FECHAS, p in POSICIONES}: 
@@ -109,6 +112,9 @@ s.t. CONDFORMACION {l in FECHAS, p in POSICIONES}:
 s.t. CONDSUPLENTES {p in POSICIONES}: 
 		sum{(i,j,k) in JUGADORES} (JUEGADE[i,j,k,p] * EQUIPO[i,j,k]) = 
 		sum{f in FORMACIONES} (JUGADORESPORFORMACION[p, f] + SUPLENTESPORPUESTO)* FORMACIONSEL[f] ;
+
+
+
 
 #solo una formacion seleccionada
 s.t. CONDUNAFORMACION: sum{f in FORMACIONES} FORMACIONSEL[f] = 1;
@@ -121,19 +127,19 @@ solve;
 #Impresión de la salida.
 printf "\n***** EL PUNTAJE OBTENIDO ES %i *****\n", z;
 
-printf "\n***** LA COTIZACIÓN TOTAL ES %i *****\n", sum{(i,j,k) in JUGADORES} EQUIPO[i,j,k] * COTIZACIONES[i,j,k];
+#printf "\n***** LA COTIZACIÓN TOTAL ES %i *****\n", sum{(i,j,k) in JUGADORES} EQUIPO[i,j,k] * COTIZACIONES[i,j,k];
 
 
 for {i in FORMACIONES: FORMACIONSEL[i] = 1}
 {
 	printf "\n***** LA FORMACIÓN SELECCIONADA ES %s *****\n",i;
 }
-printf "\n***** EQUIPO SELECCIONADO *****\n";
-for {(i,j,k) in JUGADORES: EQUIPO[i,j,k] = 1}
-{ 
-	  printf "%s, Posición: %s, Equipo: %s \n", i,j,k;
+#printf "\n***** EQUIPO SELECCIONADO *****\n";
+#for {(i,j,k) in JUGADORES: EQUIPO[i,j,k] = 1}
+#{ 
+#	  printf "%s, Posición: %s, Equipo: %s \n", i,j,k;
 
-}
+#}
 
 printf "\n***** DATOS POR FECHA *****\n\n";
 
