@@ -14,6 +14,6 @@ DEL 2 3 3;
 
 param SUPLENTESPORPUESTO := 1;
 #table datos IN "CSV" "GranDT2015_formatted.csv": M <- [DESDE,HACIA], d~DISTANCIA,c~COSTO;
-
+param TAMEQUIPO := 15;
 
 end;

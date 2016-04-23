@@ -5,7 +5,7 @@ param MAXPRESUPUESTO;
 param MULTIPLICADORCAPITAN;
 param MAXIMOPOREQUIPO;
 param SUPLENTESPORPUESTO;
-
+param TAMEQUIPO;
 set JUGADORES dimen 3;
 
 param COTIZACIONES 'el jugador cotiza' {(i,j,k) in JUGADORES};
@@ -83,7 +83,7 @@ maximize z: sum {f in FECHAS} PUNTAJEOBTENIDO [f] ;
 s.t. CONDEQUIPO{(i,j,k) in JUGADORES, l in FECHAS}:  TITULARES[i,j,k,l] <= EQUIPO[i,j,k];
 
 #el equipo no puede tener ni mas ni menos de 15 jugadores
-s.t. CONDGRUPO: sum{(i,j,k) in JUGADORES} EQUIPO[i,j,k] = 15;
+s.t. CONDGRUPO: sum{(i,j,k) in JUGADORES} EQUIPO[i,j,k] = TAMEQUIPO;
 
 #el equipo no puede tener ni mas ni menos de 11 titulares por fecha
 s.t. CONDTITULARES{f in FECHAS}: sum{(i,j,k) in JUGADORES} TITULARES[i,j,k,f] = 11;
