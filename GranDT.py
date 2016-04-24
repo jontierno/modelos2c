@@ -18,29 +18,36 @@ with open('/home/colopreda/ClionProjects/GranDT/GranDT2015_formatted.csv', newli
 	trescuatrotres.extend(volante[-4:])
 	trescuatrotres.extend(delantero[-3:])
 
-	for row in trescuatrotres:				
-		print(row)
-
-	print(sum(int(row[20]) for row in trescuatrotres))
+	suma343 = sum(int(row[20]) for row in trescuatrotres)
 
 	cuatrocuatrodos = arquero[-1:]
 	cuatrocuatrodos.extend(defensa[-4:])
 	cuatrocuatrodos.extend(volante[-4:])
 	cuatrocuatrodos.extend(delantero[-2:])
 
-	for row in cuatrocuatrodos:				
-		print(row)
-
-	print(sum(int(row[20]) for row in cuatrocuatrodos))
+	suma442 = sum(int(row[20]) for row in cuatrocuatrodos)
 
 	cuatrotrestres = arquero[-1:]
 	cuatrotrestres.extend(defensa[-4:])
 	cuatrotrestres.extend(volante[-3:])
 	cuatrotrestres.extend(delantero[-3:])
 
-	for row in cuatrotrestres:				
-		print(row)
+	suma433 = sum(int(row[20]) for row in cuatrotrestres)
 
-	print(sum(int(row[20]) for row in cuatrotrestres))
+	if (suma343 >= suma433 and suma343 >= suma442):
+		print("La formacion seleccionada es 1-3-4-3 con los siguientes jugadores:")
+		for row in trescuatrotres:				
+			print(row)
+		print("El puntaje obtenido es: ", suma343)
 
-	
+	if (suma433 >= suma343 and suma433 >= suma442):
+		print("La formacion seleccionada es 1-4-4-2 con los siguientes jugadores:")
+		for row in cuatrotrestres:				
+			print(row)
+		print("El puntaje obtenido es: ", suma433)
+
+	if (suma442 >= suma343 and suma442 >= suma433):
+		print("La formacion seleccionada es 1-4-3-3 con los siguientes jugadores:")
+		for row in cuatrocuatrodos:				
+			print(row)
+		print("El puntaje obtenido es: ", suma442)
