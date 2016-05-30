@@ -1,0 +1,825 @@
+GLPSOL: GLPK LP/MIP Solver, v4.57
+Parameter(s) specified in the command line:
+ -m grandt.mod -d grandt.dat -o sol0.o --cuts --tmlim 10800 --log salida0.txt
+Reading model section from grandt.mod...
+grandt.mod:223: warning: final NL missing before end of file
+223 lines were read
+Reading data section from grandt.dat...
+20 lines were read
+Reading resultados...
+
+****** Han sido leidos 1014 jugadores ****** 
+****** Han sido leidos 30 equipos     ****** 
+****** Han sido leidas 4 posiciones   ****** 
+
+Generating z...
+Generating CONDEQUIPO...
+Generating CONDGRUPO...
+Generating CONDTITULARES...
+Generating CONDMAXIMOPRESUPUESTO...
+Generating CONDCAPITAN...
+Generating CONDTITULARCAP...
+Generating CONDJUGADORESPOREQUIPO...
+Generating CONDFORMACION...
+Generating CONDNOJUEGASINOESTABAYNOENTRA...
+Generating CONDNOENTRA...
+Generating CONDNOENTRASIESTAENAMBASFECHAS...
+Generating CONDMAXIMASTRANSFERENCIASPORFECHA...
+Generating CONDMAXSUMPLENTESLIBRES...
+Generating CONDSUPLENTES...
+Generating CONDUNAFORMACION...
+Generating CONDPUNTAJEPORFECHA...
+Model has been successfully generated
+GLPK Integer Optimizer, v4.57
+73670 rows, 59848 columns, 306594 non-zeros
+59833 integer variables, all of which are binary
+Preprocessing...
+14196 hidden packing inequaliti(es) were detected
+14196 hidden covering inequaliti(es) were detected
+5852 constraint coefficient(s) were reduced
+73668 rows, 59829 columns, 306500 non-zeros
+59829 integer variables, all of which are binary
+Scaling...
+ A: min|aij| =  1.000e+00  max|aij| =  8.000e+06  ratio =  8.000e+06
+GM: min|aij| =  7.825e-02  max|aij| =  1.278e+01  ratio =  1.633e+02
+EQ: min|aij| =  6.124e-03  max|aij| =  1.000e+00  ratio =  1.633e+02
+2N: min|aij| =  3.815e-03  max|aij| =  1.250e+00  ratio =  3.277e+02
+Constructing initial basis...
+Size of triangular part is 73638
+Solving LP relaxation...
+GLPK Simplex Optimizer, v4.57
+73668 rows, 59829 columns, 306500 non-zeros
+      0: obj =   1.410000000e+02 inf =   3.451e+02 (148)
+    500: obj =   7.000000000e+01 inf =   9.375e-01 (15) 3
+    540: obj =   6.300000000e+01 inf =   0.000e+00 (0) 1
+*  1000: obj =   2.910000000e+02 inf =   0.000e+00 (11206) 1
+*  1500: obj =   3.990000000e+02 inf =   1.471e-15 (13306) 2
+*  2000: obj =   6.475000000e+02 inf =   0.000e+00 (11604) 2
+*  2500: obj =   7.890000000e+02 inf =   0.000e+00 (11719) 2
+*  3000: obj =   9.250000000e+02 inf =   0.000e+00 (11934) 1
+*  3500: obj =   1.068000000e+03 inf =   0.000e+00 (14353) 3
+*  4000: obj =   1.306000000e+03 inf =   0.000e+00 (11202) 2
+*  4500: obj =   1.435500000e+03 inf =   1.388e-16 (14446) 2
+*  5000: obj =   1.555500000e+03 inf =   0.000e+00 (8824) 2
+*  5500: obj =   1.690000000e+03 inf =   0.000e+00 (8239) 2
+*  6000: obj =   1.716000000e+03 inf =   0.000e+00 (9496)
+*  6500: obj =   1.847000000e+03 inf =   0.000e+00 (11662) 2
+*  7000: obj =   1.847000000e+03 inf =   0.000e+00 (11642) 1
+*  7500: obj =   1.903333333e+03 inf =   3.244e-15 (8370) 2
+*  8000: obj =   1.932000000e+03 inf =   0.000e+00 (9318) 1
+*  8500: obj =   1.946000000e+03 inf =   0.000e+00 (9970) 3
+*  9000: obj =   1.958000000e+03 inf =   0.000e+00 (10658) 1
+*  9500: obj =   1.972000000e+03 inf =   1.140e-14 (8627) 2
+* 10000: obj =   2.035000000e+03 inf =   0.000e+00 (10958) 3
+* 10500: obj =   2.049000000e+03 inf =   0.000e+00 (7962) 2
+* 11000: obj =   2.095000000e+03 inf =   0.000e+00 (6266) 2
+* 11500: obj =   2.148000000e+03 inf =   0.000e+00 (7174) 2
+* 12000: obj =   2.154666667e+03 inf =   4.410e-15 (7942) 1
+* 12500: obj =   2.220000000e+03 inf =   0.000e+00 (4887) 3
+* 13000: obj =   2.220000000e+03 inf =   0.000e+00 (7701)
+* 13500: obj =   2.252000000e+03 inf =   0.000e+00 (7183) 3
+* 14000: obj =   2.305000000e+03 inf =   0.000e+00 (6754) 2
+* 14500: obj =   2.305000000e+03 inf =   0.000e+00 (5174) 2
+* 15000: obj =   2.309000000e+03 inf =   0.000e+00 (5842) 1
+* 15500: obj =   2.324000000e+03 inf =   0.000e+00 (9540) 3
+* 16000: obj =   2.374000000e+03 inf =   0.000e+00 (7247) 1
+* 16500: obj =   2.374000000e+03 inf =   0.000e+00 (4316) 3
+* 17000: obj =   2.374000000e+03 inf =   0.000e+00 (6939) 2
+* 17500: obj =   2.374000000e+03 inf =   0.000e+00 (7363) 3
+* 18000: obj =   2.441000000e+03 inf =   0.000e+00 (6776) 3
+* 18500: obj =   2.454000000e+03 inf =   0.000e+00 (6655) 2
+* 19000: obj =   2.461000000e+03 inf =   0.000e+00 (6408) 1
+* 19500: obj =   2.461000000e+03 inf =   0.000e+00 (3229) 3
+* 20000: obj =   2.474000000e+03 inf =   0.000e+00 (7105) 2
+* 20500: obj =   2.496500000e+03 inf =   0.000e+00 (4960) 3
+* 21000: obj =   2.496500000e+03 inf =   2.068e-14 (7918) 1
+* 21500: obj =   2.544000000e+03 inf =   0.000e+00 (3774) 2
+* 22000: obj =   2.558000000e+03 inf =   0.000e+00 (8204) 1
+* 22500: obj =   2.574000000e+03 inf =   0.000e+00 (2464) 2
+* 23000: obj =   2.589000000e+03 inf =   0.000e+00 (5626) 1
+* 23500: obj =   2.597000000e+03 inf =   0.000e+00 (4728) 2
+* 24000: obj =   2.597000000e+03 inf =   0.000e+00 (3531) 2
+* 24500: obj =   2.600000000e+03 inf =   0.000e+00 (6640) 2
+* 25000: obj =   2.600000000e+03 inf =   1.319e-13 (8917) 1
+* 25500: obj =   2.600000000e+03 inf =   0.000e+00 (2989) 3
+* 26000: obj =   2.600000000e+03 inf =   0.000e+00 (6675) 1
+* 26500: obj =   2.607800000e+03 inf =   6.862e-14 (5562) 1
+* 27000: obj =   2.615000000e+03 inf =   0.000e+00 (3584) 2
+* 27500: obj =   2.625000000e+03 inf =   0.000e+00 (4107) 1
+* 28000: obj =   2.633000000e+03 inf =   0.000e+00 (1537) 2
+* 28500: obj =   2.633000000e+03 inf =   6.939e-18 (3786) 1
+* 29000: obj =   2.633000000e+03 inf =   0.000e+00 (5516) 2
+* 29500: obj =   2.649500000e+03 inf =   0.000e+00 (4604) 2
+* 30000: obj =   2.660000000e+03 inf =   0.000e+00 (2037) 1
+* 30500: obj =   2.665000000e+03 inf =   0.000e+00 (981) 2
+* 31000: obj =   2.669000000e+03 inf =   0.000e+00 (1558) 1
+* 31500: obj =   2.674000000e+03 inf =   0.000e+00 (3365) 2
+* 32000: obj =   2.687500000e+03 inf =   2.848e-14 (1841) 1
+* 32500: obj =   2.687500000e+03 inf =   0.000e+00 (5547) 2
+* 33000: obj =   2.689500000e+03 inf =   0.000e+00 (977) 1
+* 33500: obj =   2.693666667e+03 inf =   3.810e-14 (1357) 2
+* 34000: obj =   2.695666667e+03 inf =   5.642e-14 (610) 1
+* 34500: obj =   2.696000000e+03 inf =   2.294e-14 (71) 1
+* 34644: obj =   2.697000000e+03 inf =   3.071e-14 (0) 1
+OPTIMAL LP SOLUTION FOUND
+Integer optimization begins...
+Gomory's cuts enabled
+MIR cuts enabled
+Cover cuts enabled
+Clique cuts enabled
+Constructing conflict graph...
+Conflict graph has 44619 + 30420 = 75039 vertices
++ 34644: mip =     not found yet <=              +inf        (1; 0)
++ 34644: >>>>>   2.697000000e+03 <=   2.697000000e+03   0.0% (1; 0)
++ 34644: mip =   2.697000000e+03 <=     tree is empty   0.0% (0; 1)
+INTEGER OPTIMAL SOLUTION FOUND
+Time used:   100.2 secs
+Memory used: 209.0 Mb (219146011 bytes)
+
+***** EL PUNTAJE OBTENIDO ES 2697 *****
+
+***** LA FORMACIÓN SELECCIONADA ES 1-3-4-3 *****
+
+***** DATOS POR FECHA *****
+
+********** FECHA 1 **********
+EQUIPO SELECCIONADO: 
+ Escudero, Sergio, Posición: DEF, Equipo: Belgrano de Cba 
+ Díaz, Daniel, Posición: DEF, Equipo: Boca Juniors 
+ Bertochi, Nicolás, Posición: VOL, Equipo: Defensa y Justicia 
+ Damonte, Israel, Posición: VOL, Equipo: Estudiantes LP 
+ Albertengo, Lucas, Posición: DEL, Equipo: Independiente 
+ Rodríguez, Maxi, Posición: VOL, Equipo: Newells Old Boys 
+ Gutiérrez, Teófilo, Posición: DEL, Equipo: River Plate 
+ Donatti, Alejandro, Posición: DEF, Equipo: Rosario Central 
+ Cervi, Franco, Posición: DEL, Equipo: Rosario Central 
+ López, Ramiro, Posición: VOL, Equipo: San Martín SJ 
+ Crivelli, Federico, Posición: ARQ, Equipo: Temperley 
+
+COTIZACIÓN 45700500
+
+
+TITULARES: 
+ Escudero, Sergio, Posición: DEF, Equipo: Belgrano de Cba 
+ Díaz, Daniel, Posición: DEF, Equipo: Boca Juniors 
+ Bertochi, Nicolás, Posición: VOL, Equipo: Defensa y Justicia 
+ Damonte, Israel, Posición: VOL, Equipo: Estudiantes LP 
+ Albertengo, Lucas, Posición: DEL, Equipo: Independiente 
+ Rodríguez, Maxi, Posición: VOL, Equipo: Newells Old Boys 
+ Gutiérrez, Teófilo, Posición: DEL, Equipo: River Plate 
+ Donatti, Alejandro, Posición: DEF, Equipo: Rosario Central 
+ Cervi, Franco, Posición: DEL, Equipo: Rosario Central 
+ López, Ramiro, Posición: VOL, Equipo: San Martín SJ 
+ Crivelli, Federico, Posición: ARQ, Equipo: Temperley 
+
+ El Capitan es Albertengo, Lucas DEL Independiente
+
+JUGADORES QUE SALIERON EN ESTA FECHA: 
+ Damonte, Israel, Posición: VOL, Equipo: Estudiantes LP 
+ Albertengo, Lucas, Posición: DEL, Equipo: Independiente 
+ López, Ramiro, Posición: VOL, Equipo: San Martín SJ 
+ Crivelli, Federico, Posición: ARQ, Equipo: Temperley 
+
+PUNTAJE OBTENIDO: 198
+
+********** FECHA 2 **********
+EQUIPO SELECCIONADO: 
+ Bertolo, Nicolás, Posición: VOL, Equipo: Banfield 
+ Escudero, Sergio, Posición: DEF, Equipo: Belgrano de Cba 
+ Sara, Guillermo, Posición: ARQ, Equipo: Boca Juniors 
+ Díaz, Daniel, Posición: DEF, Equipo: Boca Juniors 
+ Ramírez, David, Posición: VOL, Equipo: Colón de Santa Fe 
+ Bertochi, Nicolás, Posición: VOL, Equipo: Defensa y Justicia 
+ Rodríguez, Maxi, Posición: VOL, Equipo: Newells Old Boys 
+ Gutiérrez, Teófilo, Posición: DEL, Equipo: River Plate 
+ Donatti, Alejandro, Posición: DEF, Equipo: Rosario Central 
+ Cervi, Franco, Posición: DEL, Equipo: Rosario Central 
+ Niell, Franco, Posición: DEL, Equipo: Rosario Central 
+
+COTIZACIÓN 47400500
+
+
+TITULARES: 
+ Bertolo, Nicolás, Posición: VOL, Equipo: Banfield 
+ Escudero, Sergio, Posición: DEF, Equipo: Belgrano de Cba 
+ Sara, Guillermo, Posición: ARQ, Equipo: Boca Juniors 
+ Díaz, Daniel, Posición: DEF, Equipo: Boca Juniors 
+ Ramírez, David, Posición: VOL, Equipo: Colón de Santa Fe 
+ Bertochi, Nicolás, Posición: VOL, Equipo: Defensa y Justicia 
+ Rodríguez, Maxi, Posición: VOL, Equipo: Newells Old Boys 
+ Gutiérrez, Teófilo, Posición: DEL, Equipo: River Plate 
+ Donatti, Alejandro, Posición: DEF, Equipo: Rosario Central 
+ Cervi, Franco, Posición: DEL, Equipo: Rosario Central 
+ Niell, Franco, Posición: DEL, Equipo: Rosario Central 
+
+ El Capitan es Bertolo, Nicolás VOL Banfield
+
+JUGADORES QUE ENTRARON EN ESTA FECHA: 
+ Bertolo, Nicolás, Posición: VOL, Equipo: Banfield 
+ Sara, Guillermo, Posición: ARQ, Equipo: Boca Juniors 
+ Ramírez, David, Posición: VOL, Equipo: Colón de Santa Fe 
+ Niell, Franco, Posición: DEL, Equipo: Rosario Central 
+
+JUGADORES QUE SALIERON EN ESTA FECHA: 
+ Ramírez, David, Posición: VOL, Equipo: Colón de Santa Fe 
+ Bertochi, Nicolás, Posición: VOL, Equipo: Defensa y Justicia 
+ Gutiérrez, Teófilo, Posición: DEL, Equipo: River Plate 
+ Cervi, Franco, Posición: DEL, Equipo: Rosario Central 
+
+PUNTAJE OBTENIDO: 139
+
+********** FECHA 3 **********
+EQUIPO SELECCIONADO: 
+ Martínez, Roger, Posición: DEL, Equipo: Aldosivi de MdP 
+ Bertolo, Nicolás, Posición: VOL, Equipo: Banfield 
+ Escudero, Sergio, Posición: DEF, Equipo: Belgrano de Cba 
+ Sara, Guillermo, Posición: ARQ, Equipo: Boca Juniors 
+ Díaz, Daniel, Posición: DEF, Equipo: Boca Juniors 
+ Mancuello, Federico, Posición: VOL, Equipo: Independiente 
+ Rodríguez, Maxi, Posición: VOL, Equipo: Newells Old Boys 
+ Mora, Rodrigo, Posición: DEL, Equipo: River Plate 
+ Donatti, Alejandro, Posición: DEF, Equipo: Rosario Central 
+ Niell, Franco, Posición: DEL, Equipo: Rosario Central 
+ Núñez, Gervasio, Posición: VOL, Equipo: Sarmiento de Junín 
+
+COTIZACIÓN 51200000
+
+
+TITULARES: 
+ Martínez, Roger, Posición: DEL, Equipo: Aldosivi de MdP 
+ Bertolo, Nicolás, Posición: VOL, Equipo: Banfield 
+ Escudero, Sergio, Posición: DEF, Equipo: Belgrano de Cba 
+ Sara, Guillermo, Posición: ARQ, Equipo: Boca Juniors 
+ Díaz, Daniel, Posición: DEF, Equipo: Boca Juniors 
+ Mancuello, Federico, Posición: VOL, Equipo: Independiente 
+ Rodríguez, Maxi, Posición: VOL, Equipo: Newells Old Boys 
+ Mora, Rodrigo, Posición: DEL, Equipo: River Plate 
+ Donatti, Alejandro, Posición: DEF, Equipo: Rosario Central 
+ Niell, Franco, Posición: DEL, Equipo: Rosario Central 
+ Núñez, Gervasio, Posición: VOL, Equipo: Sarmiento de Junín 
+
+ El Capitan es Mora, Rodrigo DEL River Plate
+
+JUGADORES QUE ENTRARON EN ESTA FECHA: 
+ Martínez, Roger, Posición: DEL, Equipo: Aldosivi de MdP 
+ Mancuello, Federico, Posición: VOL, Equipo: Independiente 
+ Mora, Rodrigo, Posición: DEL, Equipo: River Plate 
+ Núñez, Gervasio, Posición: VOL, Equipo: Sarmiento de Junín 
+
+JUGADORES QUE SALIERON EN ESTA FECHA: 
+ Bertolo, Nicolás, Posición: VOL, Equipo: Banfield 
+ Sara, Guillermo, Posición: ARQ, Equipo: Boca Juniors 
+ Mancuello, Federico, Posición: VOL, Equipo: Independiente 
+ Niell, Franco, Posición: DEL, Equipo: Rosario Central 
+
+PUNTAJE OBTENIDO: 160
+
+********** FECHA 4 **********
+EQUIPO SELECCIONADO: 
+ Martínez, Roger, Posición: DEL, Equipo: Aldosivi de MdP 
+ Escudero, Sergio, Posición: DEF, Equipo: Belgrano de Cba 
+ Díaz, Daniel, Posición: DEF, Equipo: Boca Juniors 
+ Arias, Gabriel, Posición: ARQ, Equipo: Defensa y Justicia 
+ Rodríguez, Maxi, Posición: VOL, Equipo: Newells Old Boys 
+ Mora, Rodrigo, Posición: DEL, Equipo: River Plate 
+ Donatti, Alejandro, Posición: DEF, Equipo: Rosario Central 
+ Ruben, Marco, Posición: DEL, Equipo: Rosario Central 
+ Blanco, Sebastián, Posición: VOL, Equipo: San Lorenzo de A 
+ Núñez, Gervasio, Posición: VOL, Equipo: Sarmiento de Junín 
+ Malcorra, Ignacio, Posición: VOL, Equipo: Unión de Santa Fe 
+
+COTIZACIÓN 46700000
+
+
+TITULARES: 
+ Martínez, Roger, Posición: DEL, Equipo: Aldosivi de MdP 
+ Escudero, Sergio, Posición: DEF, Equipo: Belgrano de Cba 
+ Díaz, Daniel, Posición: DEF, Equipo: Boca Juniors 
+ Arias, Gabriel, Posición: ARQ, Equipo: Defensa y Justicia 
+ Rodríguez, Maxi, Posición: VOL, Equipo: Newells Old Boys 
+ Mora, Rodrigo, Posición: DEL, Equipo: River Plate 
+ Donatti, Alejandro, Posición: DEF, Equipo: Rosario Central 
+ Ruben, Marco, Posición: DEL, Equipo: Rosario Central 
+ Blanco, Sebastián, Posición: VOL, Equipo: San Lorenzo de A 
+ Núñez, Gervasio, Posición: VOL, Equipo: Sarmiento de Junín 
+ Malcorra, Ignacio, Posición: VOL, Equipo: Unión de Santa Fe 
+
+ El Capitan es Ruben, Marco DEL Rosario Central
+
+JUGADORES QUE ENTRARON EN ESTA FECHA: 
+ Arias, Gabriel, Posición: ARQ, Equipo: Defensa y Justicia 
+ Ruben, Marco, Posición: DEL, Equipo: Rosario Central 
+ Blanco, Sebastián, Posición: VOL, Equipo: San Lorenzo de A 
+ Malcorra, Ignacio, Posición: VOL, Equipo: Unión de Santa Fe 
+
+JUGADORES QUE SALIERON EN ESTA FECHA: 
+ Martínez, Roger, Posición: DEL, Equipo: Aldosivi de MdP 
+ Rodríguez, Maxi, Posición: VOL, Equipo: Newells Old Boys 
+ Ruben, Marco, Posición: DEL, Equipo: Rosario Central 
+ Blanco, Sebastián, Posición: VOL, Equipo: San Lorenzo de A 
+
+PUNTAJE OBTENIDO: 171
+
+********** FECHA 5 **********
+EQUIPO SELECCIONADO: 
+ Carrera, Ramiro, Posición: VOL, Equipo: Arsenal FC 
+ Cazares, Juan, Posición: VOL, Equipo: Banfield 
+ Escudero, Sergio, Posición: DEF, Equipo: Belgrano de Cba 
+ Díaz, Daniel, Posición: DEF, Equipo: Boca Juniors 
+ Arias, Gabriel, Posición: ARQ, Equipo: Defensa y Justicia 
+ Melano, Lucas, Posición: DEL, Equipo: Lanús 
+ Mora, Rodrigo, Posición: DEL, Equipo: River Plate 
+ Donatti, Alejandro, Posición: DEF, Equipo: Rosario Central 
+ Matos, Mauro, Posición: DEL, Equipo: San Lorenzo de A 
+ Núñez, Gervasio, Posición: VOL, Equipo: Sarmiento de Junín 
+ Malcorra, Ignacio, Posición: VOL, Equipo: Unión de Santa Fe 
+
+COTIZACIÓN 42300000
+
+
+TITULARES: 
+ Carrera, Ramiro, Posición: VOL, Equipo: Arsenal FC 
+ Cazares, Juan, Posición: VOL, Equipo: Banfield 
+ Escudero, Sergio, Posición: DEF, Equipo: Belgrano de Cba 
+ Díaz, Daniel, Posición: DEF, Equipo: Boca Juniors 
+ Arias, Gabriel, Posición: ARQ, Equipo: Defensa y Justicia 
+ Melano, Lucas, Posición: DEL, Equipo: Lanús 
+ Mora, Rodrigo, Posición: DEL, Equipo: River Plate 
+ Donatti, Alejandro, Posición: DEF, Equipo: Rosario Central 
+ Matos, Mauro, Posición: DEL, Equipo: San Lorenzo de A 
+ Núñez, Gervasio, Posición: VOL, Equipo: Sarmiento de Junín 
+ Malcorra, Ignacio, Posición: VOL, Equipo: Unión de Santa Fe 
+
+ El Capitan es Melano, Lucas DEL Lanús
+
+JUGADORES QUE ENTRARON EN ESTA FECHA: 
+ Carrera, Ramiro, Posición: VOL, Equipo: Arsenal FC 
+ Cazares, Juan, Posición: VOL, Equipo: Banfield 
+ Melano, Lucas, Posición: DEL, Equipo: Lanús 
+ Matos, Mauro, Posición: DEL, Equipo: San Lorenzo de A 
+
+JUGADORES QUE SALIERON EN ESTA FECHA: 
+ Carrera, Ramiro, Posición: VOL, Equipo: Arsenal FC 
+ Díaz, Daniel, Posición: DEF, Equipo: Boca Juniors 
+ Melano, Lucas, Posición: DEL, Equipo: Lanús 
+ Mora, Rodrigo, Posición: DEL, Equipo: River Plate 
+
+PUNTAJE OBTENIDO: 191
+
+********** FECHA 6 **********
+EQUIPO SELECCIONADO: 
+ Cazares, Juan, Posición: VOL, Equipo: Banfield 
+ Escudero, Sergio, Posición: DEF, Equipo: Belgrano de Cba 
+ Márquez, Fernando, Posición: DEL, Equipo: Belgrano de Cba 
+ Arias, Gabriel, Posición: ARQ, Equipo: Defensa y Justicia 
+ Abila, Ramón, Posición: DEL, Equipo: Huracán 
+ Ayala, Víctor, Posición: VOL, Equipo: Lanús 
+ Donatti, Alejandro, Posición: DEF, Equipo: Rosario Central 
+ Matos, Mauro, Posición: DEL, Equipo: San Lorenzo de A 
+ Núñez, Gervasio, Posición: VOL, Equipo: Sarmiento de Junín 
+ Malcorra, Ignacio, Posición: VOL, Equipo: Unión de Santa Fe 
+ Amor, Emiliano, Posición: DEF, Equipo: Vélez Sarsfield 
+
+COTIZACIÓN 37400800
+
+
+TITULARES: 
+ Cazares, Juan, Posición: VOL, Equipo: Banfield 
+ Escudero, Sergio, Posición: DEF, Equipo: Belgrano de Cba 
+ Márquez, Fernando, Posición: DEL, Equipo: Belgrano de Cba 
+ Arias, Gabriel, Posición: ARQ, Equipo: Defensa y Justicia 
+ Abila, Ramón, Posición: DEL, Equipo: Huracán 
+ Ayala, Víctor, Posición: VOL, Equipo: Lanús 
+ Donatti, Alejandro, Posición: DEF, Equipo: Rosario Central 
+ Matos, Mauro, Posición: DEL, Equipo: San Lorenzo de A 
+ Núñez, Gervasio, Posición: VOL, Equipo: Sarmiento de Junín 
+ Malcorra, Ignacio, Posición: VOL, Equipo: Unión de Santa Fe 
+ Amor, Emiliano, Posición: DEF, Equipo: Vélez Sarsfield 
+
+ El Capitan es Abila, Ramón DEL Huracán
+
+JUGADORES QUE ENTRARON EN ESTA FECHA: 
+ Márquez, Fernando, Posición: DEL, Equipo: Belgrano de Cba 
+ Abila, Ramón, Posición: DEL, Equipo: Huracán 
+ Ayala, Víctor, Posición: VOL, Equipo: Lanús 
+ Amor, Emiliano, Posición: DEF, Equipo: Vélez Sarsfield 
+
+JUGADORES QUE SALIERON EN ESTA FECHA: 
+ Cazares, Juan, Posición: VOL, Equipo: Banfield 
+ Escudero, Sergio, Posición: DEF, Equipo: Belgrano de Cba 
+ Abila, Ramón, Posición: DEL, Equipo: Huracán 
+ Ayala, Víctor, Posición: VOL, Equipo: Lanús 
+
+PUNTAJE OBTENIDO: 206
+
+********** FECHA 7 **********
+EQUIPO SELECCIONADO: 
+ Márquez, Fernando, Posición: DEL, Equipo: Belgrano de Cba 
+ Meli, César, Posición: VOL, Equipo: Boca Juniors 
+ Arias, Gabriel, Posición: ARQ, Equipo: Defensa y Justicia 
+ Fernández, Ignacio, Posición: VOL, Equipo: Gimnasia LP 
+ Cavenaghi, Fernando, Posición: DEL, Equipo: River Plate 
+ Donatti, Alejandro, Posición: DEF, Equipo: Rosario Central 
+ Matos, Mauro, Posición: DEL, Equipo: San Lorenzo de A 
+ Delgado, Daniel, Posición: DEF, Equipo: Sarmiento de Junín 
+ Núñez, Gervasio, Posición: VOL, Equipo: Sarmiento de Junín 
+ Malcorra, Ignacio, Posición: VOL, Equipo: Unión de Santa Fe 
+ Amor, Emiliano, Posición: DEF, Equipo: Vélez Sarsfield 
+
+COTIZACIÓN 38300800
+
+
+TITULARES: 
+ Márquez, Fernando, Posición: DEL, Equipo: Belgrano de Cba 
+ Meli, César, Posición: VOL, Equipo: Boca Juniors 
+ Arias, Gabriel, Posición: ARQ, Equipo: Defensa y Justicia 
+ Fernández, Ignacio, Posición: VOL, Equipo: Gimnasia LP 
+ Cavenaghi, Fernando, Posición: DEL, Equipo: River Plate 
+ Donatti, Alejandro, Posición: DEF, Equipo: Rosario Central 
+ Matos, Mauro, Posición: DEL, Equipo: San Lorenzo de A 
+ Delgado, Daniel, Posición: DEF, Equipo: Sarmiento de Junín 
+ Núñez, Gervasio, Posición: VOL, Equipo: Sarmiento de Junín 
+ Malcorra, Ignacio, Posición: VOL, Equipo: Unión de Santa Fe 
+ Amor, Emiliano, Posición: DEF, Equipo: Vélez Sarsfield 
+
+ El Capitan es Núñez, Gervasio VOL Sarmiento de Junín
+
+JUGADORES QUE ENTRARON EN ESTA FECHA: 
+ Meli, César, Posición: VOL, Equipo: Boca Juniors 
+ Fernández, Ignacio, Posición: VOL, Equipo: Gimnasia LP 
+ Cavenaghi, Fernando, Posición: DEL, Equipo: River Plate 
+ Delgado, Daniel, Posición: DEF, Equipo: Sarmiento de Junín 
+
+JUGADORES QUE SALIERON EN ESTA FECHA: 
+ Márquez, Fernando, Posición: DEL, Equipo: Belgrano de Cba 
+ Matos, Mauro, Posición: DEL, Equipo: San Lorenzo de A 
+ Delgado, Daniel, Posición: DEF, Equipo: Sarmiento de Junín 
+ Malcorra, Ignacio, Posición: VOL, Equipo: Unión de Santa Fe 
+
+PUNTAJE OBTENIDO: 183
+
+********** FECHA 8 **********
+EQUIPO SELECCIONADO: 
+ Silva, Santiago, Posición: DEL, Equipo: Arsenal FC 
+ Rigoni, Emiliano, Posición: VOL, Equipo: Belgrano de Cba 
+ Meli, César, Posición: VOL, Equipo: Boca Juniors 
+ Arias, Gabriel, Posición: ARQ, Equipo: Defensa y Justicia 
+ Fernández, Ignacio, Posición: VOL, Equipo: Gimnasia LP 
+ Ramírez, Rubén, Posición: DEL, Equipo: Quilmes AC 
+ Cavenaghi, Fernando, Posición: DEL, Equipo: River Plate 
+ Donatti, Alejandro, Posición: DEF, Equipo: Rosario Central 
+ Gómez, José Luis, Posición: DEF, Equipo: San Martín SJ 
+ Núñez, Gervasio, Posición: VOL, Equipo: Sarmiento de Junín 
+ Amor, Emiliano, Posición: DEF, Equipo: Vélez Sarsfield 
+
+COTIZACIÓN 38500800
+
+
+TITULARES: 
+ Silva, Santiago, Posición: DEL, Equipo: Arsenal FC 
+ Rigoni, Emiliano, Posición: VOL, Equipo: Belgrano de Cba 
+ Meli, César, Posición: VOL, Equipo: Boca Juniors 
+ Arias, Gabriel, Posición: ARQ, Equipo: Defensa y Justicia 
+ Fernández, Ignacio, Posición: VOL, Equipo: Gimnasia LP 
+ Ramírez, Rubén, Posición: DEL, Equipo: Quilmes AC 
+ Cavenaghi, Fernando, Posición: DEL, Equipo: River Plate 
+ Donatti, Alejandro, Posición: DEF, Equipo: Rosario Central 
+ Gómez, José Luis, Posición: DEF, Equipo: San Martín SJ 
+ Núñez, Gervasio, Posición: VOL, Equipo: Sarmiento de Junín 
+ Amor, Emiliano, Posición: DEF, Equipo: Vélez Sarsfield 
+
+ El Capitan es Gómez, José Luis DEF San Martín SJ
+
+JUGADORES QUE ENTRARON EN ESTA FECHA: 
+ Silva, Santiago, Posición: DEL, Equipo: Arsenal FC 
+ Rigoni, Emiliano, Posición: VOL, Equipo: Belgrano de Cba 
+ Ramírez, Rubén, Posición: DEL, Equipo: Quilmes AC 
+ Gómez, José Luis, Posición: DEF, Equipo: San Martín SJ 
+
+JUGADORES QUE SALIERON EN ESTA FECHA: 
+ Rigoni, Emiliano, Posición: VOL, Equipo: Belgrano de Cba 
+ Meli, César, Posición: VOL, Equipo: Boca Juniors 
+ Ramírez, Rubén, Posición: DEL, Equipo: Quilmes AC 
+ Amor, Emiliano, Posición: DEF, Equipo: Vélez Sarsfield 
+
+PUNTAJE OBTENIDO: 200
+
+********** FECHA 9 **********
+EQUIPO SELECCIONADO: 
+ Silva, Santiago, Posición: DEL, Equipo: Arsenal FC 
+ Arias, Gabriel, Posición: ARQ, Equipo: Defensa y Justicia 
+ Fernández, Ignacio, Posición: VOL, Equipo: Gimnasia LP 
+ Cavenaghi, Fernando, Posición: DEL, Equipo: River Plate 
+ Donatti, Alejandro, Posición: DEF, Equipo: Rosario Central 
+ Gómez, José Luis, Posición: DEF, Equipo: San Martín SJ 
+ Luna, Sebastián, Posición: VOL, Equipo: Sarmiento de Junín 
+ Núñez, Gervasio, Posición: VOL, Equipo: Sarmiento de Junín 
+ Sambueza, Fabián, Posición: VOL, Equipo: Temperley 
+ González Pirez, Leandro, Posición: DEF, Equipo: Tigre 
+ Pavone, Mariano, Posición: DEL, Equipo: Vélez Sarsfield 
+
+COTIZACIÓN 38200900
+
+
+TITULARES: 
+ Silva, Santiago, Posición: DEL, Equipo: Arsenal FC 
+ Arias, Gabriel, Posición: ARQ, Equipo: Defensa y Justicia 
+ Fernández, Ignacio, Posición: VOL, Equipo: Gimnasia LP 
+ Cavenaghi, Fernando, Posición: DEL, Equipo: River Plate 
+ Donatti, Alejandro, Posición: DEF, Equipo: Rosario Central 
+ Gómez, José Luis, Posición: DEF, Equipo: San Martín SJ 
+ Luna, Sebastián, Posición: VOL, Equipo: Sarmiento de Junín 
+ Núñez, Gervasio, Posición: VOL, Equipo: Sarmiento de Junín 
+ Sambueza, Fabián, Posición: VOL, Equipo: Temperley 
+ González Pirez, Leandro, Posición: DEF, Equipo: Tigre 
+ Pavone, Mariano, Posición: DEL, Equipo: Vélez Sarsfield 
+
+ El Capitan es Pavone, Mariano DEL Vélez Sarsfield
+
+JUGADORES QUE ENTRARON EN ESTA FECHA: 
+ Luna, Sebastián, Posición: VOL, Equipo: Sarmiento de Junín 
+ Sambueza, Fabián, Posición: VOL, Equipo: Temperley 
+ González Pirez, Leandro, Posición: DEF, Equipo: Tigre 
+ Pavone, Mariano, Posición: DEL, Equipo: Vélez Sarsfield 
+
+JUGADORES QUE SALIERON EN ESTA FECHA: 
+ Silva, Santiago, Posición: DEL, Equipo: Arsenal FC 
+ Arias, Gabriel, Posición: ARQ, Equipo: Defensa y Justicia 
+ Núñez, Gervasio, Posición: VOL, Equipo: Sarmiento de Junín 
+ Pavone, Mariano, Posición: DEL, Equipo: Vélez Sarsfield 
+
+PUNTAJE OBTENIDO: 187
+
+********** FECHA 10 **********
+EQUIPO SELECCIONADO: 
+ Cuero, Mauricio, Posición: DEL, Equipo: Banfield 
+ Pavón, Cristian, Posición: VOL, Equipo: Boca Juniors 
+ Navarro, Nicolás, Posición: ARQ, Equipo: Gimnasia LP 
+ Fernández, Ignacio, Posición: VOL, Equipo: Gimnasia LP 
+ Cavenaghi, Fernando, Posición: DEL, Equipo: River Plate 
+ Donatti, Alejandro, Posición: DEF, Equipo: Rosario Central 
+ Gómez, José Luis, Posición: DEF, Equipo: San Martín SJ 
+ Luna, Sebastián, Posición: VOL, Equipo: Sarmiento de Junín 
+ Sambueza, Fabián, Posición: VOL, Equipo: Temperley 
+ González Pirez, Leandro, Posición: DEF, Equipo: Tigre 
+ Triverio, Enrique, Posición: DEL, Equipo: Unión de Santa Fe 
+
+COTIZACIÓN 32500900
+
+
+TITULARES: 
+ Cuero, Mauricio, Posición: DEL, Equipo: Banfield 
+ Pavón, Cristian, Posición: VOL, Equipo: Boca Juniors 
+ Navarro, Nicolás, Posición: ARQ, Equipo: Gimnasia LP 
+ Fernández, Ignacio, Posición: VOL, Equipo: Gimnasia LP 
+ Cavenaghi, Fernando, Posición: DEL, Equipo: River Plate 
+ Donatti, Alejandro, Posición: DEF, Equipo: Rosario Central 
+ Gómez, José Luis, Posición: DEF, Equipo: San Martín SJ 
+ Luna, Sebastián, Posición: VOL, Equipo: Sarmiento de Junín 
+ Sambueza, Fabián, Posición: VOL, Equipo: Temperley 
+ González Pirez, Leandro, Posición: DEF, Equipo: Tigre 
+ Triverio, Enrique, Posición: DEL, Equipo: Unión de Santa Fe 
+
+ El Capitan es Triverio, Enrique DEL Unión de Santa Fe
+
+JUGADORES QUE ENTRARON EN ESTA FECHA: 
+ Cuero, Mauricio, Posición: DEL, Equipo: Banfield 
+ Pavón, Cristian, Posición: VOL, Equipo: Boca Juniors 
+ Navarro, Nicolás, Posición: ARQ, Equipo: Gimnasia LP 
+ Triverio, Enrique, Posición: DEL, Equipo: Unión de Santa Fe 
+
+JUGADORES QUE SALIERON EN ESTA FECHA: 
+ Cavenaghi, Fernando, Posición: DEL, Equipo: River Plate 
+ Donatti, Alejandro, Posición: DEF, Equipo: Rosario Central 
+ Gómez, José Luis, Posición: DEF, Equipo: San Martín SJ 
+ Luna, Sebastián, Posición: VOL, Equipo: Sarmiento de Junín 
+
+PUNTAJE OBTENIDO: 194
+
+********** FECHA 11 **********
+EQUIPO SELECCIONADO: 
+ Cuero, Mauricio, Posición: DEL, Equipo: Banfield 
+ Zelarayán, Lucas, Posición: VOL, Equipo: Belgrano de Cba 
+ Burdisso, Guillermo, Posición: DEF, Equipo: Boca Juniors 
+ Pavón, Cristian, Posición: VOL, Equipo: Boca Juniors 
+ Navarro, Nicolás, Posición: ARQ, Equipo: Gimnasia LP 
+ Fernández, Ignacio, Posición: VOL, Equipo: Gimnasia LP 
+ Cabral, Yonathan, Posición: DEF, Equipo: Racing Club 
+ Sambueza, Fabián, Posición: VOL, Equipo: Temperley 
+ González Pirez, Leandro, Posición: DEF, Equipo: Tigre 
+ Luna, Carlos, Posición: DEL, Equipo: Tigre 
+ Triverio, Enrique, Posición: DEL, Equipo: Unión de Santa Fe 
+
+COTIZACIÓN 34800900
+
+
+TITULARES: 
+ Cuero, Mauricio, Posición: DEL, Equipo: Banfield 
+ Zelarayán, Lucas, Posición: VOL, Equipo: Belgrano de Cba 
+ Burdisso, Guillermo, Posición: DEF, Equipo: Boca Juniors 
+ Pavón, Cristian, Posición: VOL, Equipo: Boca Juniors 
+ Navarro, Nicolás, Posición: ARQ, Equipo: Gimnasia LP 
+ Fernández, Ignacio, Posición: VOL, Equipo: Gimnasia LP 
+ Cabral, Yonathan, Posición: DEF, Equipo: Racing Club 
+ Sambueza, Fabián, Posición: VOL, Equipo: Temperley 
+ González Pirez, Leandro, Posición: DEF, Equipo: Tigre 
+ Luna, Carlos, Posición: DEL, Equipo: Tigre 
+ Triverio, Enrique, Posición: DEL, Equipo: Unión de Santa Fe 
+
+ El Capitan es Zelarayán, Lucas VOL Belgrano de Cba
+
+JUGADORES QUE ENTRARON EN ESTA FECHA: 
+ Zelarayán, Lucas, Posición: VOL, Equipo: Belgrano de Cba 
+ Burdisso, Guillermo, Posición: DEF, Equipo: Boca Juniors 
+ Cabral, Yonathan, Posición: DEF, Equipo: Racing Club 
+ Luna, Carlos, Posición: DEL, Equipo: Tigre 
+
+JUGADORES QUE SALIERON EN ESTA FECHA: 
+ Pavón, Cristian, Posición: VOL, Equipo: Boca Juniors 
+ Cabral, Yonathan, Posición: DEF, Equipo: Racing Club 
+ González Pirez, Leandro, Posición: DEF, Equipo: Tigre 
+ Luna, Carlos, Posición: DEL, Equipo: Tigre 
+
+PUNTAJE OBTENIDO: 145
+
+********** FECHA 12 **********
+EQUIPO SELECCIONADO: 
+ Sarulyte, Matías, Posición: DEF, Equipo: Arsenal FC 
+ Cuero, Mauricio, Posición: DEL, Equipo: Banfield 
+ Zelarayán, Lucas, Posición: VOL, Equipo: Belgrano de Cba 
+ Burdisso, Guillermo, Posición: DEF, Equipo: Boca Juniors 
+ Llama, Cristian, Posición: VOL, Equipo: Colón de Santa Fe 
+ Alario, Lucas, Posición: DEL, Equipo: Colón de Santa Fe 
+ Navarro, Nicolás, Posición: ARQ, Equipo: Gimnasia LP 
+ Fernández, Ignacio, Posición: VOL, Equipo: Gimnasia LP 
+ Lollo, Luciano, Posición: DEF, Equipo: Racing Club 
+ Sambueza, Fabián, Posición: VOL, Equipo: Temperley 
+ Triverio, Enrique, Posición: DEL, Equipo: Unión de Santa Fe 
+
+COTIZACIÓN 33800900
+
+
+TITULARES: 
+ Sarulyte, Matías, Posición: DEF, Equipo: Arsenal FC 
+ Cuero, Mauricio, Posición: DEL, Equipo: Banfield 
+ Zelarayán, Lucas, Posición: VOL, Equipo: Belgrano de Cba 
+ Burdisso, Guillermo, Posición: DEF, Equipo: Boca Juniors 
+ Llama, Cristian, Posición: VOL, Equipo: Colón de Santa Fe 
+ Alario, Lucas, Posición: DEL, Equipo: Colón de Santa Fe 
+ Navarro, Nicolás, Posición: ARQ, Equipo: Gimnasia LP 
+ Fernández, Ignacio, Posición: VOL, Equipo: Gimnasia LP 
+ Lollo, Luciano, Posición: DEF, Equipo: Racing Club 
+ Sambueza, Fabián, Posición: VOL, Equipo: Temperley 
+ Triverio, Enrique, Posición: DEL, Equipo: Unión de Santa Fe 
+
+ El Capitan es Alario, Lucas DEL Colón de Santa Fe
+
+JUGADORES QUE ENTRARON EN ESTA FECHA: 
+ Sarulyte, Matías, Posición: DEF, Equipo: Arsenal FC 
+ Llama, Cristian, Posición: VOL, Equipo: Colón de Santa Fe 
+ Alario, Lucas, Posición: DEL, Equipo: Colón de Santa Fe 
+ Lollo, Luciano, Posición: DEF, Equipo: Racing Club 
+
+JUGADORES QUE SALIERON EN ESTA FECHA: 
+ Zelarayán, Lucas, Posición: VOL, Equipo: Belgrano de Cba 
+ Burdisso, Guillermo, Posición: DEF, Equipo: Boca Juniors 
+ Alario, Lucas, Posición: DEL, Equipo: Colón de Santa Fe 
+ Triverio, Enrique, Posición: DEL, Equipo: Unión de Santa Fe 
+
+PUNTAJE OBTENIDO: 178
+
+********** FECHA 13 **********
+EQUIPO SELECCIONADO: 
+ Lequi, Matías, Posición: DEF, Equipo: Aldosivi de MdP 
+ Sarulyte, Matías, Posición: DEF, Equipo: Arsenal FC 
+ Cuero, Mauricio, Posición: DEL, Equipo: Banfield 
+ Llama, Cristian, Posición: VOL, Equipo: Colón de Santa Fe 
+ Romero, Braian, Posición: VOL, Equipo: Colón de Santa Fe 
+ Avalos, Gabriel, Posición: DEL, Equipo: Crucero del Norte 
+ Navarro, Nicolás, Posición: ARQ, Equipo: Gimnasia LP 
+ Fernández, Ignacio, Posición: VOL, Equipo: Gimnasia LP 
+ Lollo, Luciano, Posición: DEF, Equipo: Racing Club 
+ Sambueza, Fabián, Posición: VOL, Equipo: Temperley 
+ Pavone, Mariano, Posición: DEL, Equipo: Vélez Sarsfield 
+
+COTIZACIÓN 31200900
+
+
+TITULARES: 
+ Lequi, Matías, Posición: DEF, Equipo: Aldosivi de MdP 
+ Sarulyte, Matías, Posición: DEF, Equipo: Arsenal FC 
+ Cuero, Mauricio, Posición: DEL, Equipo: Banfield 
+ Llama, Cristian, Posición: VOL, Equipo: Colón de Santa Fe 
+ Romero, Braian, Posición: VOL, Equipo: Colón de Santa Fe 
+ Avalos, Gabriel, Posición: DEL, Equipo: Crucero del Norte 
+ Navarro, Nicolás, Posición: ARQ, Equipo: Gimnasia LP 
+ Fernández, Ignacio, Posición: VOL, Equipo: Gimnasia LP 
+ Lollo, Luciano, Posición: DEF, Equipo: Racing Club 
+ Sambueza, Fabián, Posición: VOL, Equipo: Temperley 
+ Pavone, Mariano, Posición: DEL, Equipo: Vélez Sarsfield 
+
+ El Capitan es Pavone, Mariano DEL Vélez Sarsfield
+
+JUGADORES QUE ENTRARON EN ESTA FECHA: 
+ Lequi, Matías, Posición: DEF, Equipo: Aldosivi de MdP 
+ Romero, Braian, Posición: VOL, Equipo: Colón de Santa Fe 
+ Avalos, Gabriel, Posición: DEL, Equipo: Crucero del Norte 
+ Pavone, Mariano, Posición: DEL, Equipo: Vélez Sarsfield 
+
+JUGADORES QUE SALIERON EN ESTA FECHA: 
+ Lequi, Matías, Posición: DEF, Equipo: Aldosivi de MdP 
+ Romero, Braian, Posición: VOL, Equipo: Colón de Santa Fe 
+ Sambueza, Fabián, Posición: VOL, Equipo: Temperley 
+ Pavone, Mariano, Posición: DEL, Equipo: Vélez Sarsfield 
+
+PUNTAJE OBTENIDO: 177
+
+********** FECHA 14 **********
+EQUIPO SELECCIONADO: 
+ Sarulyte, Matías, Posición: DEF, Equipo: Arsenal FC 
+ Cuero, Mauricio, Posición: DEL, Equipo: Banfield 
+ Llama, Cristian, Posición: VOL, Equipo: Colón de Santa Fe 
+ Avalos, Gabriel, Posición: DEL, Equipo: Crucero del Norte 
+ Navarro, Nicolás, Posición: ARQ, Equipo: Gimnasia LP 
+ Fernández, Ignacio, Posición: VOL, Equipo: Gimnasia LP 
+ Rojas, Jorge, Posición: VOL, Equipo: Gimnasia LP 
+ Domínguez, Eduardo, Posición: DEF, Equipo: Huracán 
+ Lollo, Luciano, Posición: DEF, Equipo: Racing Club 
+ Figueroa, Marcos, Posición: DEL, Equipo: San Martín SJ 
+ Malcorra, Ignacio, Posición: VOL, Equipo: Unión de Santa Fe 
+
+COTIZACIÓN 33000000
+
+
+TITULARES: 
+ Sarulyte, Matías, Posición: DEF, Equipo: Arsenal FC 
+ Cuero, Mauricio, Posición: DEL, Equipo: Banfield 
+ Llama, Cristian, Posición: VOL, Equipo: Colón de Santa Fe 
+ Avalos, Gabriel, Posición: DEL, Equipo: Crucero del Norte 
+ Navarro, Nicolás, Posición: ARQ, Equipo: Gimnasia LP 
+ Fernández, Ignacio, Posición: VOL, Equipo: Gimnasia LP 
+ Rojas, Jorge, Posición: VOL, Equipo: Gimnasia LP 
+ Domínguez, Eduardo, Posición: DEF, Equipo: Huracán 
+ Lollo, Luciano, Posición: DEF, Equipo: Racing Club 
+ Figueroa, Marcos, Posición: DEL, Equipo: San Martín SJ 
+ Malcorra, Ignacio, Posición: VOL, Equipo: Unión de Santa Fe 
+
+ El Capitan es Domínguez, Eduardo DEF Huracán
+
+JUGADORES QUE ENTRARON EN ESTA FECHA: 
+ Rojas, Jorge, Posición: VOL, Equipo: Gimnasia LP 
+ Domínguez, Eduardo, Posición: DEF, Equipo: Huracán 
+ Figueroa, Marcos, Posición: DEL, Equipo: San Martín SJ 
+ Malcorra, Ignacio, Posición: VOL, Equipo: Unión de Santa Fe 
+
+JUGADORES QUE SALIERON EN ESTA FECHA: 
+ Navarro, Nicolás, Posición: ARQ, Equipo: Gimnasia LP 
+ Domínguez, Eduardo, Posición: DEF, Equipo: Huracán 
+ Lollo, Luciano, Posición: DEF, Equipo: Racing Club 
+ Malcorra, Ignacio, Posición: VOL, Equipo: Unión de Santa Fe 
+
+PUNTAJE OBTENIDO: 166
+
+********** FECHA 15 **********
+EQUIPO SELECCIONADO: 
+ Sarulyte, Matías, Posición: DEF, Equipo: Arsenal FC 
+ Cuero, Mauricio, Posición: DEL, Equipo: Banfield 
+ Díaz, Daniel, Posición: DEF, Equipo: Boca Juniors 
+ Llama, Cristian, Posición: VOL, Equipo: Colón de Santa Fe 
+ Avalos, Gabriel, Posición: DEL, Equipo: Crucero del Norte 
+ Navarro, Hilario, Posición: ARQ, Equipo: Estudiantes LP 
+ Fernández, Ignacio, Posición: VOL, Equipo: Gimnasia LP 
+ Rojas, Jorge, Posición: VOL, Equipo: Gimnasia LP 
+ Uglessich, Mariano, Posición: DEF, Equipo: Quilmes AC 
+ Canelo, Alexis, Posición: VOL, Equipo: Quilmes AC 
+ Figueroa, Marcos, Posición: DEL, Equipo: San Martín SJ 
+
+COTIZACIÓN 31800000
+
+
+TITULARES: 
+ Sarulyte, Matías, Posición: DEF, Equipo: Arsenal FC 
+ Cuero, Mauricio, Posición: DEL, Equipo: Banfield 
+ Díaz, Daniel, Posición: DEF, Equipo: Boca Juniors 
+ Llama, Cristian, Posición: VOL, Equipo: Colón de Santa Fe 
+ Avalos, Gabriel, Posición: DEL, Equipo: Crucero del Norte 
+ Navarro, Hilario, Posición: ARQ, Equipo: Estudiantes LP 
+ Fernández, Ignacio, Posición: VOL, Equipo: Gimnasia LP 
+ Rojas, Jorge, Posición: VOL, Equipo: Gimnasia LP 
+ Uglessich, Mariano, Posición: DEF, Equipo: Quilmes AC 
+ Canelo, Alexis, Posición: VOL, Equipo: Quilmes AC 
+ Figueroa, Marcos, Posición: DEL, Equipo: San Martín SJ 
+
+ El Capitan es Díaz, Daniel DEF Boca Juniors
+
+JUGADORES QUE ENTRARON EN ESTA FECHA: 
+ Díaz, Daniel, Posición: DEF, Equipo: Boca Juniors 
+ Navarro, Hilario, Posición: ARQ, Equipo: Estudiantes LP 
+ Uglessich, Mariano, Posición: DEF, Equipo: Quilmes AC 
+ Canelo, Alexis, Posición: VOL, Equipo: Quilmes AC 
+
+PUNTAJE OBTENIDO: 202
+
+
+HAY MAS SUPLENTES EN: Model has been successfully processed
+Writing MIP solution to 'sol0.o'...

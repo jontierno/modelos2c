@@ -1,0 +1,20 @@
+	
+
+set FECHAS := 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15;
+set FORMACIONES := 1-4-4-2 1-4-3-3 1-3-4-3;
+
+param MAXPRESUPUESTO := 65000000;
+param MULTIPLICADORCAPITAN:= 1;
+param MAXIMOPOREQUIPO:=3;
+param JUGADORESPORFORMACION : 1-4-4-2 1-4-3-3 1-3-4-3 :=
+ARQ 1 1 1
+DEF 4 4 3
+VOL 4 3 4
+DEL 2 3 3;
+
+param MAXIMATRANSFERENCIASPORFECHA := 4;
+param SUPLENTESPORPUESTO := 1; 	# esto suma 4*SUPLENTESPORPUESTO suplentes
+param SUPLENTESLIBRES := 2;		# ESTO suma SUPLENTESLIBRES que serán distribuidos como el modelo seleccione.
+#table datos IN "CSV" "GranDT2015_formatted.csv": M <- [DESDE,HACIA], d~DISTANCIA,c~COSTO;
+
+end;

@@ -13,8 +13,8 @@ VOL 4 3 4
 DEL 2 3 3;
 
 param MAXIMATRANSFERENCIASPORFECHA := 4;
-param SUPLENTESPORPUESTO := 1; 	# esto suma 4*SUPLENTESPORPUESTO suplentes
-param SUPLENTESLIBRES := 2;		# ESTO suma SUPLENTESLIBRES que serán distribuidos como el modelo seleccione.
+param SUPLENTESPORPUESTO := 0; 	# esto suma 4*SUPLENTESPORPUESTO suplentes
+param SUPLENTESLIBRES := 0;		# ESTO suma SUPLENTESLIBRES que serán distribuidos como el modelo seleccione.
 #table datos IN "CSV" "GranDT2015_formatted.csv": M <- [DESDE,HACIA], d~DISTANCIA,c~COSTO;
 
 end;
