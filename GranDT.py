@@ -4,6 +4,33 @@ import csv
 import operator
 import sys
 import functools
+from collections import Counter
+
+def equipoMas3Players(jugadores):
+	equipos = []
+	for row in jugadores:
+		equipos.append(row[2]) 
+	cnt = Counter(equipos)
+	equiposMas3 = ([k for k, v in cnt.items() if v > 3])
+	return equiposMas3
+
+def cambiarJugador(equiposMas3, jugadores, datos):
+	#jugadoresAfectados = [k for k in jugadores if k in equiposMas3]
+	#print(jugadoresAfectados)
+	jugadoresAfectados = []
+	for s in jugadores:
+		for item in equiposMas3:
+			if item in s:
+				jugadoresAfectados.append(s)
+
+	if jugadoresAfectados:
+		jugadorASacarEnPos = jugadores.index(jugadoresAfectados[0])
+		jugadorSuperado = jugadores.pop(jugadorASacarEnPos)
+		reemplazo = datos[jugadorSuperado[1]][-1:]
+		datos[jugadorSuperado[1]] = datos[jugadorSuperado[1]][:-1]
+
+		jugadores += reemplazo
+		jugadores.sort(key=lambda x: int(x[3]))
 
 def generarEquipo(datos, defensas, volantes, delanteros):
 	jugadores = []
@@ -71,6 +98,11 @@ with open('GranDT2015_formatted_python.csv', newline='') as csvfile:
 	while (cotizacion > 65000000):
 		reemplazarJugadorMasCaro(datosSel, formacionSel)
 		cotizacion = sum(int(row[3]) for row in formacionSel)
+
+	equiposMas3 = equipoMas3Players(formacionSel)
+	while (equiposMas3):
+		cambiarJugador(equiposMas3, formacionSel, datos)
+		equiposMas3 = equipoMas3Players(formacionSel)
 
 	formacionSel = sorted(formacionSel, key = sortPorPos)
 
