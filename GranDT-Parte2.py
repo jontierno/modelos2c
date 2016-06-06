@@ -81,7 +81,7 @@ def sortPorPos(x):
 
 def equipoIdeal():
 	# Abro el archivo csv
-	with open('GranDT2015_formatted_python.csv', newline='') as csvfile:
+	with open('GranDT2015_formatted_python.csv') as csvfile:
 		# Lo parseo
 		reader = csv.reader(csvfile, delimiter=',', quotechar='"')
 		# Lo ordeno por puntaje total del torneo
@@ -177,7 +177,7 @@ equipoIdeal()
 puntajeTotal = 0
 
 for x in range(COLUMNA_FECHA_1, COLUMNA_FECHA_1+FECHAS):
-	with open('GranDT2015_formatted_python.csv', newline='') as csvfile:
+	with open('GranDT2015_formatted_python.csv') as csvfile:
 		reader = csv.reader(csvfile, delimiter=',', quotechar='"')
 		jugadores = sorted(reader, key=operator.itemgetter(x), reverse=True)
 		jugadores.sort(key=lambda y: int(y[x]))
@@ -224,10 +224,10 @@ for x in range(COLUMNA_FECHA_1, COLUMNA_FECHA_1+FECHAS):
 		puntajeTotal += puntaje
 		#puntaje = sum((sum([int(player[i]) for player in formacionSel])) for i in range(4, 19))
 		#puntaje += sum((max([int(player[i]) for player in formacionSel])) for i in range(4, 19))
-		print("\nEl puntaje obtenido es: ", puntaje)
+		print "\nEl puntaje obtenido es: ", puntaje
 
-		print("La cotizacion total del equipo es: ", cotizacion)
+		print "La cotizacion total del equipo es: ", cotizacion
 
-print("\n----------------------------------------\n")
-print("El puntaje total hecho por este equipo es: ", puntajeTotal)
+print "\n----------------------------------------\n"
+print  "El puntaje total hecho por este equipo es: ", puntajeTotal
 print("\n")
