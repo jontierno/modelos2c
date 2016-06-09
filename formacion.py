@@ -33,6 +33,5 @@ class Formacion:
 		return self.hayEspacioTitular("ARQ") or self.hayEspacioTitular("DEF") or self.hayEspacioTitular("VOL") or self.hayEspacioTitular("DEL")
 	
 	def __str__(self):
-
 		return '{}-{}-{}'.format(self.cupos["DEF"], self.cupos["VOL"], self.cupos["DEL"])
      

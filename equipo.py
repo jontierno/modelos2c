@@ -37,5 +37,5 @@ class Equipo:
 		return self.formacion.hayEspacioTitular() is False
 
 	def __str__(self):
-		return "Fecha: " +str(self.fecha) + "\nFormacion: " + str(self.formacion) + "\nPuntaje: " + str(self.puntaje) \
+		return "Fecha: " +str(self.fecha +1) + "\nFormacion: " + str(self.formacion) + "\nPuntaje: " + str(self.puntaje) \
 		+ "\nCotizacion: " + str(self.cotizacion)

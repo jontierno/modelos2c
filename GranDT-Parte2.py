@@ -106,7 +106,6 @@ def equipoIdeal(fecha, jugadores):
 		cuatrotrestres.agregar(j, False)
 
 	resultados.sort(key=lambda x: x.puntaje)
-
 	return resultados.pop()
 	#ordeno las formaciones y me quedo con la que obtuvo mas puntaje
 
@@ -148,6 +147,7 @@ def transferencias(formacionActual, jugadoresMenosPuntaje, datos):
 jugadores = leerJugadores()
 equipo = equipoIdeal(0, jugadores)
 
+print ("Equipo inicial seleccionado")
 print (equipo)
 
 
