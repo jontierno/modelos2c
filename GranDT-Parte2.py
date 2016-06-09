@@ -30,6 +30,36 @@ def leerJugadores ():
 			id = id +1
 	return jugadores
 
+def equipoIdeal(fecha, jugadores,suplentes):
+
+	#ordeno por el índice de la fecha
+	jugadores.sort(key=lambda y: y.sensibilidad[0], reverse=True)
+
+	#Genero un equipo por cada formacion
+	tresCuatrores =	Equipo(Formacion(3,4,3,suplentes),COTIZACION_MAX,fecha)
+	cuatrocuatrodos = Equipo(Formacion(4,4,2,suplentes),COTIZACION_MAX,fecha)
+	cuatrotrestres = Equipo(Formacion(4,3,3,suplentes),COTIZACION_MAX,fecha)
+	
+	resultados = []
+	resultados.append(tresCuatrores)
+	resultados.append(cuatrocuatrodos)
+	resultados.append(cuatrotrestres)
+
+	#los armo de forma tal que solamente entren como suplentes.
+	for j in jugadores:
+		tresCuatrores.agregar(j, False)
+		cuatrocuatrodos.agregar(j, False)
+		cuatrotrestres.agregar(j, False)
+
+	resultados.sort(key=lambda x: x.puntaje)
+	return resultados.pop()
+	#ordeno las formaciones y me quedo con la que obtuvo mas puntaje
+
+def completarEquipo(equipo, jugadores):
+	jugadores.sort(key=lambda y: y.sensibilidad[equipo.fecha+1], reverse=True)
+	for j in jugadores:
+		equipo.agregar(j,True)
+
 def equipoMas3Players(jugadores):
 
 	# Crea una lista solo con los equipos de los jugadores
@@ -83,31 +113,7 @@ def sortPorPos(x):
 	l = ["ARQ", "DEF", "VOL", "DEL"]
 	return l.index(x[1])
 
-def equipoIdeal(fecha, jugadores):
 
-	#ordeno por el índice de la fecha
-	jugadores.sort(key=lambda y: y.sensibilidad[0], reverse=True)
-
-	#Genero un equipo por cada formacion
-	tresCuatrores =	Equipo(Formacion(3,4,3,0),COTIZACION_MAX,fecha)
-	cuatrocuatrodos = Equipo(Formacion(4,4,2,0),COTIZACION_MAX,fecha)
-	cuatrotrestres = Equipo(Formacion(4,3,3,0),COTIZACION_MAX,fecha)
-	
-	resultados = []
-	resultados.append(tresCuatrores)
-	resultados.append(cuatrocuatrodos)
-	resultados.append(cuatrotrestres)
-
-	#los armo de forma tal que solamente entren como suplentes.
-
-	for j in jugadores:
-		tresCuatrores.agregar(j, False)
-		cuatrocuatrodos.agregar(j, False)
-		cuatrotrestres.agregar(j, False)
-
-	resultados.sort(key=lambda x: x.puntaje)
-	return resultados.pop()
-	#ordeno las formaciones y me quedo con la que obtuvo mas puntaje
 
 
 def jugadoresMenosPuntos(formacionActual, fecha):	
@@ -145,10 +151,15 @@ def transferencias(formacionActual, jugadoresMenosPuntaje, datos):
 #equipoIdeal()
 #puntajeTotal = 0
 jugadores = leerJugadores()
-equipo = equipoIdeal(0, jugadores)
+equipo = equipoIdeal(0, jugadores,1)
 
 print ("Equipo inicial seleccionado")
 print (equipo)
+
+completarEquipo(equipo,jugadores)
+print ("Equipo completo")
+print (equipo)
+
 
 
 #for x in range(COLUMNA_FECHA_1, COLUMNA_FECHA_1+FECHAS):

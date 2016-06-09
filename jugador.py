@@ -3,6 +3,7 @@ import math
 class Jugador:
 
 	def __init__(self, id, nombre, posicion, equipo, cotizacion, puntajes):
+		self.id = id
 		self.nombre = nombre
 		self.posicion = posicion
 		self.equipo = equipo

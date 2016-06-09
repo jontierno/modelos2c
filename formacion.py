@@ -26,12 +26,21 @@ class Formacion:
 		return self.suplentesPorPuesto < self.disponibles[tipo]
 
 
-	def hayDisponibles(self, tipo):
-		return self.disponibles[tipo] >0
+	def hayDisponibles(self, tipo):	
+		
+		return self.disponibles[tipo] > 0
 	
 	def hayEspacioTitular(self):
 		return self.hayEspacioTitular("ARQ") or self.hayEspacioTitular("DEF") or self.hayEspacioTitular("VOL") or self.hayEspacioTitular("DEL")
+
+	def printCupos(self):
+		disponibles = self.disponibles
+		cupos = self.cupos
+		suplentesPorPuesto = self.suplentesPorPuesto
+		return "ARQ: {}/{}, DEF: {}/{}, VOL: {}/{}, DEL: {}/{}".format(disponibles["ARQ"], cupos["ARQ"]+suplentesPorPuesto,
+			disponibles["DEF"], cupos["DEF"]+suplentesPorPuesto,
+			disponibles["VOL"],	cupos["VOL"]+suplentesPorPuesto, 
+			disponibles["DEL"], cupos["DEL"]+suplentesPorPuesto)
 	
 	def __str__(self):
-		return '{}-{}-{}'.format(self.cupos["DEF"], self.cupos["VOL"], self.cupos["DEL"])
-     
+		return '({}-{}-{}) {}'.format(self.cupos["DEF"], self.cupos["VOL"], self.cupos["DEL"], self.printCupos())

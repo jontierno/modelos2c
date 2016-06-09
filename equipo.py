@@ -10,6 +10,8 @@ class Equipo:
 
 	def agregar(self, jugador, puedeSerSuplente):
 		 #si no puede ser suplente, lo agrego solo si hay espacio titular
+		if(self.existe(jugador)):
+			return False
 		formacion = self.formacion
 		jug = {}
 		if puedeSerSuplente == False and not formacion.hayEspacioTitularTipo(jugador.posicion):
@@ -18,14 +20,16 @@ class Equipo:
 		jug["titular"] = formacion.hayEspacioTitularTipo(jugador.posicion)
 
 		## si no puede entrar retorno false.		
-		if self.violaCotizacion(jugador) is True or formacion.hayDisponibles(jugador.posicion) is False:
+		if self.violaCotizacion(jugador) is True or not formacion.hayDisponibles(jugador.posicion):
 			return False
 
 		#en otro caso lo agrego feliz.
 		jug["jugador"] = jugador
 		self.jugadores.append(jug)
 		self.cotizacion = self.cotizacion + jugador.cotizacion
-		self.puntaje = self.puntaje + jugador.puntajes[self.fecha]
+		if jug["titular"]:
+			self.puntaje = self.puntaje + jugador.puntajes[self.fecha]
+			
 		formacion.agregar(jugador.posicion)
 		return True
 		
@@ -36,5 +40,11 @@ class Equipo:
 	def equipoTitularCompleto(self):
 		return self.formacion.hayEspacioTitular() is False
 
+	def existe(self,jugador):
+		for j in self.jugadores:
+			if j["jugador"].id == jugador.id:
+				return True
+		return False
+
 	def __str__(self):
-		return "Fecha: {}\nFormación: {} \nPuntaje: {} \nCotizacion: {}".format(self.fecha +1, self.formacion, self.puntaje, self.cotizacion)
+		return "Fecha: {}\nFormación: {} \nPuntaje: {} \nCotizacion: {}\nJugadores: {}".format(self.fecha +1, self.formacion, self.puntaje, self.cotizacion, len(self.jugadores))
