@@ -153,12 +153,19 @@ def transferencias(formacionActual, jugadoresMenosPuntaje, datos):
 jugadores = leerJugadores()
 equipo = equipoIdeal(0, jugadores,1)
 
-print ("Equipo inicial seleccionado")
-print (equipo)
+print ("Solución de partida")
 
 completarEquipo(equipo,jugadores)
-print ("Equipo completo")
 print (equipo)
+## busco la siguiente fecha.
+for j in equipo.jugadores:
+	print("{}, Titular: {}".format(j["jugador"],j["titular"]))
+
+equipo2 = equipoIdeal(1, jugadores,1)
+print ("Solución de partida")
+print (equipo2)
+for j in equipo2.jugadores:
+	print(j["jugador"])
 
 
 

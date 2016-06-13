@@ -32,7 +32,14 @@ class Equipo:
 			
 		formacion.agregar(jugador.posicion)
 		return True
-		
+	
+#	def reordenarTitulares():
+#		for j in jugadores:
+#			for j2 in jugadores:
+#				if self.esMejorQue(j,j2):
+#					self.intercambiar(j,j2)
+#				elif:
+#				if(j["titular"])
 
 	def violaCotizacion(self, jugador):
 		return self.cotizacion + jugador.cotizacion > self.cotizacionMax
