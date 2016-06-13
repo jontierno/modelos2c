@@ -1,3 +1,7 @@
+from collections import Counter
+
+MAXIMO_POR_EQUIPO=3
+
 class Equipo:
 
 	def __init__(self, formacion , cotizacionMax, fecha):
@@ -23,6 +27,8 @@ class Equipo:
 		if self.violaCotizacion(jugador) is True or not formacion.hayDisponibles(jugador.posicion):
 			return False
 
+		if self.violaMaximoPorEquipos(jugador.equipo):
+			return False
 		#en otro caso lo agrego feliz.
 		jug["jugador"] = jugador
 		self.jugadores.append(jug)
@@ -43,6 +49,14 @@ class Equipo:
 
 	def violaCotizacion(self, jugador):
 		return self.cotizacion + jugador.cotizacion > self.cotizacionMax
+
+	def violaMaximoPorEquipos(self, equipo):
+		equipos = [j["jugador"].equipo for j in self.jugadores]
+		cnt = Counter(equipos)
+		cantidad = cnt[equipo];
+		
+		return cantidad +1 > MAXIMO_POR_EQUIPO
+
 
 	def equipoTitularCompleto(self):
 		return self.formacion.hayEspacioTitular() is False
