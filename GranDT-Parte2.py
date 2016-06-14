@@ -52,7 +52,7 @@ def equipoIdeal(fecha, jugadores,suplentes):
 		cuatrotrestres.agregar(j, False)
 
 	resultados.sort(key=lambda x: x.puntaje)
-	return resultados.pop()
+	return resultados
 	#ordeno las formaciones y me quedo con la que obtuvo mas puntaje
 
 def completarEquipo(equipo, jugadores):
@@ -149,30 +149,41 @@ def imprimirEquipo(equipo):
 #equipoIdeal()
 #puntajeTotal = 0
 
-equipos = []
 
 jugadores = leerJugadores()
-equipo = equipoIdeal(0, jugadores,1)
-
-completarEquipo(equipo, jugadores)
-equipos.append(equipo)
+equiposideales = equipoIdeal(0, jugadores,1)
+equiposfinales = []
 
 
+for equipoideal in equiposideales:
+    equipos = []
+    completarEquipo(equipoideal, jugadores)
+    equipos.append(equipoideal)
+    for x in range(1,FECHAS-1):
+        equipo1 = equipos[x-1].clonar()
+        equipo1.fecha = x
+        equipo1.reordenarTitulares()
+        equipo1.mejorar(jugadores)
+        equipos.append(equipo1)
+
+    puntaje = 0
 
 
-for x in range(1,FECHAS-1):
-    equipo = equipos[x-1].clonar()
-    equipo.fecha = x
-    equipo.reordenarTitulares()
-    equipo.mejorar(jugadores)
-    equipos.append(equipo)
 
-puntaje = 0
-for e in equipos:
-    puntaje += e.puntaje
+    for e in equipos:
+        puntaje += e.puntaje
+
+    equiposfinales.append({"puntaje":puntaje, "equipos": equipos})
+
+equiposfinales.sort(key=lambda x: x["puntaje"], reverse=False)
+
+solucion = equiposfinales.pop();
+
+for e in solucion["equipos"]:
     imprimirEquipo(e)
 
-print ("Puntaje Total:",puntaje)
+print("Puntaje Total:", solucion["puntaje"])
+
 #for x in range(COLUMNA_FECHA_1, COLUMNA_FECHA_1+FECHAS):
 	#with open('GranDT2015_formatted_python.csv') as csvfile:
 		#reader = csv.reader(csvfile, delimiter=',', quotechar='"')
