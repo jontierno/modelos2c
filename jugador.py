@@ -14,13 +14,12 @@ class Jugador:
 		self.sensibilidad = []
 
 		media = sum(puntajes) / len(puntajes)
-		restas = [(x - media) * (x - media) for x in puntajes]
-		varianza = math.sqrt(sum(restas) / len(restas))
 		for i in puntajes:
-			self.sensibilidad.append(self.calcularIndiceSensibilidad(i, varianza, media))
+			self.sensibilidad.append(self.calcularIndiceSensibilidad(i, media))
+			media -= i / len(puntajes)
 
 
-	def calcularIndiceSensibilidad (self, puntaje, varianza, media ):
+	def calcularIndiceSensibilidad (self, puntaje, media ):
 		return  puntaje + media
 		#return puntaje
 
