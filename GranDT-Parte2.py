@@ -170,7 +170,7 @@ for x in range(1,FECHAS-1):
 puntaje = 0
 for e in equipos:
     puntaje += e.puntaje
-    imprimirEquipo(equipo)
+    imprimirEquipo(e)
 
 print ("Puntaje Total:",puntaje)
 #for x in range(COLUMNA_FECHA_1, COLUMNA_FECHA_1+FECHAS):
