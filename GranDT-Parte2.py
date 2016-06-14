@@ -15,7 +15,7 @@ JUG_POR_EQUIPO = 3
 COTIZACION_MAX = 65000000
 FECHAS = 15
 COLUMNA_FECHA_1 = 4
-SUPLENTES_POR_PUESTO=2
+SUPLENTES_POR_PUESTO=0
 def leerJugadores ():
 	jugadores = []
 	
@@ -106,6 +106,7 @@ equipo = equipoIdeal(0, jugadores,SUPLENTES_POR_PUESTO)
 completarEquipo(equipo, jugadores, equipo.fecha+1)
 equipos.append(equipo)
 equipo.reordenarTitulares()
+equipo.transferencias = 0
 formacionesPosibles = [Formacion(3, 4, 3, SUPLENTES_POR_PUESTO), Formacion(4, 4, 2, SUPLENTES_POR_PUESTO),Formacion(4, 3, 3, SUPLENTES_POR_PUESTO)]
 
 for x in range(1,FECHAS):
@@ -115,6 +116,7 @@ for x in range(1,FECHAS):
         equipo1 = equipos[x-1].clonar()
         equipo1.formacion = formacion
         equipo1.fecha = x
+		#esto saca un titular del equipo, por eso lo hago.
         equipo1.reordenarTitulares()
         #completo el equipo dsps de cambiar la formación ya que alguno quedó afuera sí o sí.
         completarEquipo(equipo1,jugadores,x)
@@ -134,10 +136,10 @@ for e in equipos:
     puntaje += e.puntaje
     print()
     imprimirEquipo(e)
-    #if e != equipos[0]:
-    #    transferencias = contarTransferencias(previo,e)
-    #    print("Transferencias contadas:", transferencias)
-    #previo = e
+ #   if e != equipos[0]:
+ #       transferencias = contarTransferencias(previo,e)
+ #       print("Transferencias contadas:", transferencias)
+ #   previo = e
 
 print()
 print ("Puntaje Total:",puntaje)
