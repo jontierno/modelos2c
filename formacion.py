@@ -22,6 +22,10 @@ class Formacion:
             return True
         return False
 
+    def quitar(self, tipo):
+        if self.disponibles[tipo] < self.cupos[tipo] + self.suplentesPorPuesto:
+            self.disponibles[tipo] = self.disponibles[tipo] + 1
+
     def hayEspacioTitularTipo(self, tipo):
         return self.suplentesPorPuesto < self.disponibles[tipo]
 
@@ -45,5 +49,15 @@ class Formacion:
                                                                        disponibles["DEL"],
                                                                        cupos["DEL"] + suplentesPorPuesto)
 
+    def clonar(self):
+        return Formacion(self.cupos["DEF"], self.cupos["VOL"], self.cupos["DEL"], self.suplentesPorPuesto)
+
     def __str__(self):
         return '({}-{}-{}) {}'.format(self.cupos["DEF"], self.cupos["VOL"], self.cupos["DEL"], self.printCupos())
+
+    def reset(self):
+        self.disponibles = {}
+        self.disponibles["ARQ"] = 1 + self.suplentesPorPuesto
+        self.disponibles["DEF"] = self.cupos["DEF"] + self.suplentesPorPuesto
+        self.disponibles["VOL"] = self.cupos["VOL"] + self.suplentesPorPuesto
+        self.disponibles["DEL"] = self.cupos["DEL"] + self.suplentesPorPuesto

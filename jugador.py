@@ -17,7 +17,8 @@ class Jugador:
 			self.sensibilidad.append(self.calcularIndiceSensibilidad(i))
 
 	def calcularIndiceSensibilidad (self, puntaje):
-		return self.puntajeTotal * puntaje / math.log10(self.cotizacion + 10)
+		#return self.puntajeTotal * puntaje / math.log10(self.cotizacion + 10)
+		return puntaje
 
 	def __str__(self):
 		return "{} {} {} {}".format(self.nombre, self.posicion, self.equipo, self.cotizacion)
