@@ -194,7 +194,9 @@ for x in range(1,FECHAS):
         equipo1.formacion = formacion
         equipo1.fecha = x
         equipo1.reordenarTitulares()
+        #completo el equipo dsps de cambiar la formación ya que alguno quedó afuera sí o sí.
         completarEquipo(equipo1,jugadores,x)
+
         equipo1.mejorar(jugadores)
         equiposEnFecha.append(equipo1)
 

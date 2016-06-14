@@ -1,5 +1,6 @@
 
 import math
+MU = 1
 class Jugador:
 
 	def __init__(self, id, nombre, posicion, equipo, cotizacion, puntajes):
@@ -9,16 +10,19 @@ class Jugador:
 		self.equipo = equipo
 		self.cotizacion = cotizacion
 		self.puntajes = puntajes
-		self.puntajeTotal = 0
-		for i in puntajes:
-			self.puntajeTotal = self.puntajeTotal + i
+		self.puntajeTotal = sum (puntajes)
 		self.sensibilidad = []
-		for i in puntajes:
-			self.sensibilidad.append(self.calcularIndiceSensibilidad(i))
 
-	def calcularIndiceSensibilidad (self, puntaje):
-		#return self.puntajeTotal * puntaje / math.log10(self.cotizacion + 10)
-		return puntaje
+		media = sum(puntajes) / len(puntajes)
+		restas = [(x - media) * (x - media) for x in puntajes]
+		varianza = math.sqrt(sum(restas) / len(restas))
+		for i in puntajes:
+			self.sensibilidad.append(self.calcularIndiceSensibilidad(i, varianza, media))
+
+
+	def calcularIndiceSensibilidad (self, puntaje, varianza, media ):
+		return  puntaje + media
+		#return puntaje
 
 	def __str__(self):
 		return "{} {} {} {}".format(self.nombre, self.posicion, self.equipo, self.cotizacion)
