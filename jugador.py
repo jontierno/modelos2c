@@ -1,6 +1,6 @@
 
 import math
-MU = 1
+MU =  0.9
 class Jugador:
 
 	def __init__(self, id, nombre, posicion, equipo, cotizacion, puntajes):
@@ -14,9 +14,10 @@ class Jugador:
 		self.sensibilidad = []
 
 		media = sum(puntajes) / len(puntajes)
+
 		for i in puntajes:
 			self.sensibilidad.append(self.calcularIndiceSensibilidad(i, media))
-			media -= i / len(puntajes)
+			media -= i *MU/ len(puntajes)
 
 
 	def calcularIndiceSensibilidad (self, puntaje, media ):
