@@ -15,7 +15,7 @@ JUG_POR_EQUIPO = 3
 COTIZACION_MAX = 65000000
 FECHAS = 15
 COLUMNA_FECHA_1 = 4
-
+SUPLENTES_POR_PUESTO=1
 def leerJugadores ():
 	jugadores = []
 	
@@ -55,10 +55,11 @@ def equipoIdeal(fecha, jugadores,suplentes):
 	return resultados.pop()
 	#ordeno las formaciones y me quedo con la que obtuvo mas puntaje
 
-def completarEquipo(equipo, jugadores):
-	jugadores.sort(key=lambda y: y.sensibilidad[equipo.fecha+1], reverse=True)
-	for j in jugadores:
-		equipo.agregar(j,True)
+def completarEquipo(equipo, jugadores, fecha):
+    jugadores.sort(key=lambda y: y.sensibilidad[fecha], reverse=True)
+    for j in jugadores:
+        if not equipo.existe(j) and equipo.agregar(j, True):
+            equipo.transferencias +=1
 
 def equipoMas3Players(jugadores):
 	pass
@@ -145,6 +146,13 @@ def imprimirEquipo(equipo):
         print("{}, Titular: {}".format(j["jugador"], j["titular"]))
     print()
 
+def contarTransferencias ( previo, equipo):
+    matches = 0
+    for j in previo.jugadores:
+        matches += len([x for x in equipo.jugadores if x["jugador"] == j["jugador"]])
+
+    return len(equipo.jugadores) - matches
+
 #equiposPorFechas = []
 #equipoIdeal()
 #puntajeTotal = 0
@@ -152,30 +160,42 @@ def imprimirEquipo(equipo):
 equipos = []
 
 jugadores = leerJugadores()
-equipo = equipoIdeal(0, jugadores,1)
+equipo = equipoIdeal(0, jugadores,SUPLENTES_POR_PUESTO)
 
 
 
 
-completarEquipo(equipo, jugadores)
+completarEquipo(equipo, jugadores, equipo.fecha+1)
 equipos.append(equipo)
 
-
-
+formacionesPosibles = [Formacion(3, 4, 3, SUPLENTES_POR_PUESTO), Formacion(4, 4, 2, SUPLENTES_POR_PUESTO),Formacion(4, 3, 3, SUPLENTES_POR_PUESTO)]
 
 for x in range(1,FECHAS):
-    equipo1 = equipos[x-1].clonar()
-    equipo1.fecha = x
-    equipo1.reordenarTitulares()
-    equipo1.mejorar(jugadores)
+    equiposEnFecha = []
+    for f in formacionesPosibles:
+        formacion = f.clonar()
+        equipo1 = equipos[x-1].clonar()
+        equipo1.formacion = formacion
+        equipo1.fecha = x
+        equipo1.reordenarTitulares()
+        completarEquipo(equipo1,jugadores,x)
+        equipo1.mejorar(jugadores)
+        equiposEnFecha.append(equipo1)
 
-
-
-    equipos.append(equipo1)
+    # tomo el que mas puntos hizo
+    equiposEnFecha.sort(key=lambda x: x.puntaje)
+    equipos.append(equiposEnFecha.pop())
 
 puntaje = 0
+
+previo = 0
 for e in equipos:
     puntaje += e.puntaje
     imprimirEquipo(e)
+    if e != equipos[0]:
+        transferencias = contarTransferencias(previo,e)
+        print("Transferencias contadas:", transferencias)
+    previo = e
+
 
 print ("Puntaje Total:",puntaje)

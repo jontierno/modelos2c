@@ -60,11 +60,10 @@ class Equipo:
         return False
 
     def mejorar(self, jugadores):
-        intercambios = 0
         jugadores.sort(key=lambda y: y.sensibilidad[self.fecha], reverse=True)
         self.jugadores.sort(key=lambda y: y["jugador"].sensibilidad[self.fecha], reverse=False)
         for nuevo in jugadores:
-            if intercambios == MAXIMO_TRANSFERENCIAS:
+            if self.transferencias >= MAXIMO_TRANSFERENCIAS:
                 break
             if(self.existe(nuevo)):
                 continue
@@ -73,18 +72,19 @@ class Equipo:
                 if (jugAct.posicion == nuevo.posicion and jugAct.sensibilidad[self.fecha] < nuevo.sensibilidad[
                     self.fecha]):
                     if self.intercambiar(antiguo, nuevo):
-                        intercambios += 1
+                        self.transferencias += 1
                         break
 
         self.reordenarTitulares()
 
 
     def __str__(self):
-        return "Fecha: {}\nFormación: {} \nPuntaje: {} \nCotizacion: {}\nJugadores: {}".format(self.fecha + 1,
+        return "Fecha: {}\nFormación: {} \nPuntaje: {} \nCotizacion: {}\nJugadores: {}\nTransferencias:".format(self.fecha + 1,
                                                                                                self.formacion,
                                                                                                self.puntaje,
                                                                                                self.cotizacion,
-                                                                                               len(self.jugadores))
+                                                                                               len(self.jugadores),
+                                                                                                self.transferencias)
 
     def intercambiar(self, jugAct, nuevo):
         self.remover(jugAct)
