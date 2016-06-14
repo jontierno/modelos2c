@@ -141,10 +141,26 @@ def transferencias(formacionActual, jugadoresMenosPuntaje, datos):
 
 def imprimirEquipo(equipo):
     print(equipo)
-    ## busco la siguiente fecha.
-    for j in equipo.jugadores:
-        print("{}, Titular: {}".format(j["jugador"], j["titular"]))
+
+    #arqueros  titulares
+    arqueros = [x for x in equipo.jugadores if x["jugador"].posicion =="ARQ" and x["titular"]]
+
+    defensores = [x for x in equipo.jugadores if x["jugador"].posicion == "DEF" and x["titular"]]
+
+    volantes = [x for x in equipo.jugadores if x["jugador"].posicion == "VOL" and x["titular"]]
+
+    delanteros = [x for x in equipo.jugadores if x["jugador"].posicion == "DEL" and x["titular"]]
+
+    print("Titulares")
+    for j in arqueros: print(j["jugador"])
+    for j in defensores: print(j["jugador"])
+    for j in volantes: print(j["jugador"])
+    for j in delanteros: print(j["jugador"])
     print()
+    if(SUPLENTES_POR_PUESTO > 0) :
+        print("Suplentes")
+        for j in [x for x in equipo.jugadores if x["titular"] == False]:
+            print(j["jugador"])
 
 def contarTransferencias ( previo, equipo):
     matches = 0
@@ -183,7 +199,7 @@ for x in range(1,FECHAS):
         equiposEnFecha.append(equipo1)
 
     # tomo el que mas puntos hizo
-    equiposEnFecha.sort(key=lambda x: x.puntaje)
+    equiposEnFecha.sort(key=lambda x: x.puntaje, reverse=False)
     equipos.append(equiposEnFecha.pop())
 
 puntaje = 0
@@ -191,11 +207,12 @@ puntaje = 0
 previo = 0
 for e in equipos:
     puntaje += e.puntaje
+    print()
     imprimirEquipo(e)
     #if e != equipos[0]:
     #    transferencias = contarTransferencias(previo,e)
     #    print("Transferencias contadas:", transferencias)
     #previo = e
 
-
+print()
 print ("Puntaje Total:",puntaje)

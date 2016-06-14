@@ -40,13 +40,13 @@ class Formacion:
         disponibles = self.disponibles
         cupos = self.cupos
         suplentesPorPuesto = self.suplentesPorPuesto
-        return "ARQ: {}/{}, DEF: {}/{}, VOL: {}/{}, DEL: {}/{}".format(disponibles["ARQ"],
+        return "ARQ: {}/{}, DEF: {}/{}, VOL: {}/{}, DEL: {}/{}".format(cupos["ARQ"] + suplentesPorPuesto - disponibles["ARQ"],
                                                                        cupos["ARQ"] + suplentesPorPuesto,
-                                                                       disponibles["DEF"],
+                                                                       cupos["DEF"] + suplentesPorPuesto - disponibles["DEF"],
                                                                        cupos["DEF"] + suplentesPorPuesto,
-                                                                       disponibles["VOL"],
+                                                                       cupos["VOL"] + suplentesPorPuesto - disponibles["VOL"],
                                                                        cupos["VOL"] + suplentesPorPuesto,
-                                                                       disponibles["DEL"],
+                                                                       cupos["DEL"] + suplentesPorPuesto - disponibles["DEL"],
                                                                        cupos["DEL"] + suplentesPorPuesto)
 
     def clonar(self):
