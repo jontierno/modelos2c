@@ -52,7 +52,7 @@ def equipoIdeal(fecha, jugadores,suplentes):
 		cuatrotrestres.agregar(j, False)
 
 	resultados.sort(key=lambda x: x.puntaje)
-	return resultados
+	return resultados.pop()
 	#ordeno las formaciones y me quedo con la que obtuvo mas puntaje
 
 def completarEquipo(equipo, jugadores):
@@ -149,93 +149,33 @@ def imprimirEquipo(equipo):
 #equipoIdeal()
 #puntajeTotal = 0
 
+equipos = []
 
 jugadores = leerJugadores()
-equiposideales = equipoIdeal(0, jugadores,1)
-equiposfinales = []
-
-
-for equipoideal in equiposideales:
-    equipos = []
-    completarEquipo(equipoideal, jugadores)
-    equipos.append(equipoideal)
-    for x in range(1,FECHAS-1):
-        equipo1 = equipos[x-1].clonar()
-        equipo1.fecha = x
-        equipo1.reordenarTitulares()
-        equipo1.mejorar(jugadores)
-        equipos.append(equipo1)
-
-    puntaje = 0
+equipo = equipoIdeal(0, jugadores,1)
 
 
 
-    for e in equipos:
-        puntaje += e.puntaje
 
-    equiposfinales.append({"puntaje":puntaje, "equipos": equipos})
+completarEquipo(equipo, jugadores)
+equipos.append(equipo)
 
-equiposfinales.sort(key=lambda x: x["puntaje"], reverse=False)
 
-solucion = equiposfinales.pop();
 
-for e in solucion["equipos"]:
+
+for x in range(1,FECHAS):
+    equipo1 = equipos[x-1].clonar()
+    equipo1.fecha = x
+    equipo1.reordenarTitulares()
+    equipo1.mejorar(jugadores)
+
+
+
+    equipos.append(equipo1)
+
+puntaje = 0
+for e in equipos:
+    puntaje += e.puntaje
     imprimirEquipo(e)
 
-print("Puntaje Total:", solucion["puntaje"])
-
-#for x in range(COLUMNA_FECHA_1, COLUMNA_FECHA_1+FECHAS):
-	#with open('GranDT2015_formatted_python.csv') as csvfile:
-		#reader = csv.reader(csvfile, delimiter=',', quotechar='"')
-		#jugadores = sorted(reader, key=operator.itemgetter(x), reverse=True)
-		#jugadores.sort(key=lambda y: int(y[x]))
-
-		# Creo el mapa de datos para la fecha X
-		#datos = {
-		#"ARQ" : [k for k in jugadores if 'ARQ' in k],
-		#"DEF" : [k for k in jugadores if 'DEF' in k],
-		#"VOL" : [k for k in jugadores if 'VOL' in k],
-		#"DEL" : [k for k in jugadores if 'DEL' in k],
-		#}
-
-		# Uso de base la formacion de la fecha anterior
-		#formacionActual = equiposPorFechas[x - COLUMNA_FECHA_1]
-		# Lista con los jugadores con menos puntaje
-		#jugadoresMenosPuntaje = jugadoresMenosPuntos(formacionActual, x)
-
-		# Hago las transferencias
-		#transferencias(formacionActual, jugadoresMenosPuntaje, datos)
-
-		# Chequeo que no se haya excedido de presupuesto
-		#cotizacion = sum(int(row[3]) for row in formacionActual)
-		#while (cotizacion > COTIZACION_MAX):
-		#	reemplazarJugadorMasCaro(datosSel, formacionActual)
-		#	cotizacion = sum(int(row[3]) for row in formacionActual)
-
-		# Chequeo que no haya mas de 3 jugadores de un mismo equipo
-		#equiposMas3 = equipoMas3Players(formacionActual)
-		#while (equiposMas3):
-		#	cambiarJugador(equiposMas3, formacionActual, datos)
-		#	equiposMas3 = equipoMas3Players(formacionActual)
-
-		# Ordeno para que se impriman bien
-		#formacionActual = sorted(formacionActual, key = sortPorPos)
-		# Lo agrego a la lista de equipos por fecha
-		#equiposPorFechas.append(formacionActual)
-
-		# Impresion
-		#print ("{:<25}{:^10}{:<20}{:<15}{:<10}".format("Nombre","Pos","Equipo", "Cotizacion", "Puntaje"))
-		#print ("{:<25}{:^10}{:<20}{:<15}{:<10}\n".format("-"*6,"-"*3,"-"*6, "-"*10, "-"*7))
-		#for row in formacionActual:
-		#	print ("{:<25}{:^10}{:<20}{:<15}{:<10}".format(row[0],row[1],row[2], row[3], row[x]))
-		#puntaje = sum(int(row[x]) for row in formacionActual)
-		#puntajeTotal += puntaje
-		#puntaje = sum((sum([int(player[i]) for player in formacionSel])) for i in range(4, 19))
-		#puntaje += sum((max([int(player[i]) for player in formacionSel])) for i in range(4, 19))
-		#print ("\nEl puntaje obtenido es: ", puntaje)
-
-		#print ("La cotizacion total del equipo es: ", cotizacion)
-
-#print ("\n----------------------------------------\n")
-#print  ("El puntaje total hecho por este equipo es: ", puntajeTotal)
-#print("\n")
+print ("Puntaje Total:",puntaje)
