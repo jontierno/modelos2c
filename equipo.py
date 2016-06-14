@@ -79,7 +79,7 @@ class Equipo:
 
 
     def __str__(self):
-        return "Fecha: {}\nFormación: {} \nPuntaje: {} \nCotizacion: {}\nJugadores: {}\nTransferencias:".format(self.fecha + 1,
+        return "Fecha: {}\nFormación: {} \nPuntaje: {} \nCotizacion: {}\nJugadores: {}\nTransferencias:{}".format(self.fecha + 1,
                                                                                                self.formacion,
                                                                                                self.puntaje,
                                                                                                self.cotizacion,

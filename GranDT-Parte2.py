@@ -192,10 +192,10 @@ previo = 0
 for e in equipos:
     puntaje += e.puntaje
     imprimirEquipo(e)
-    if e != equipos[0]:
-        transferencias = contarTransferencias(previo,e)
-        print("Transferencias contadas:", transferencias)
-    previo = e
+    #if e != equipos[0]:
+    #    transferencias = contarTransferencias(previo,e)
+    #    print("Transferencias contadas:", transferencias)
+    #previo = e
 
 
 print ("Puntaje Total:",puntaje)
