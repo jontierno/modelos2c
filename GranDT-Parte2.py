@@ -15,7 +15,7 @@ JUG_POR_EQUIPO = 3
 COTIZACION_MAX = 65000000
 FECHAS = 15
 COLUMNA_FECHA_1 = 4
-SUPLENTES_POR_PUESTO=1
+SUPLENTES_POR_PUESTO=2
 def leerJugadores ():
 	jugadores = []
 	
@@ -61,84 +61,6 @@ def completarEquipo(equipo, jugadores, fecha):
         if not equipo.existe(j) and equipo.agregar(j, True):
             equipo.transferencias +=1
 
-def equipoMas3Players(jugadores):
-	pass
-
-def cambiarJugador(equiposMas3, jugadores, datos):
-	
-	# Crea una lista con los jugadores del equipo que tiene mas de 3 jugadores
-
-	jugadoresAfectados = [j for j in jugadores if j[2] in equiposMas3]
-
-	if jugadoresAfectados:
-		# Busca el indice
-		jugadorASacarEnPos = jugadores.index(jugadoresAfectados[0])
-		# Lo saca del equipo
-		jugadorSuperado = jugadores.pop(jugadorASacarEnPos)
-		# Busca un reemplazo en la misma posicion
-		reemplazo = datos[jugadorSuperado[1]][-1:]
-		# Saca a ese jugador de la lista de posibles reemplazos
-		datos[jugadorSuperado[1]] = datos[jugadorSuperado[1]][:-1]
-
-		# Agrega al reemplazo al equipo
-		jugadores += reemplazo
-		# Ordena por cotizacion
-		jugadores.sort(key=lambda x: int(x[3]))
-
-def generarEquipo(datos, defensas, volantes, delanteros, fecha):
-	pass
-
-def reemplazarJugadorMasCaro(datos, jugadores):
-	# Al estar siempre ordenado por cotizacion, el pop saca el jugador mas caro
-	mascaro = jugadores.pop()
-	# Busca el reemplazo que tenga la mayor cantidad de puntos en su posicion
-	reemplazo = datos[mascaro[1]][-1:]
-	# Lo saca del mapa para que si hay que reemplazar otro no vuelva a aparecer
-	datos[mascaro[1]] = datos[mascaro[1]][:-1]
-
-	# Lo agrega al equipo
-	jugadores += reemplazo
-	# Ordeno por cotizacion
-	jugadores.sort(key=lambda x: int(x[3]))
-
-def sortPorPos(x):
-	# Funcion que sirve solamente para que se vea linda la salida
-	l = ["ARQ", "DEF", "VOL", "DEL"]
-	return l.index(x[1])
-
-
-
-
-def jugadoresMenosPuntos(formacionActual, fecha):	
-	ordenPorFecha = formacionActual
-	# Ordeno por menor cantidad de puntos en la fechas
-	ordenPorFecha.sort(key=lambda x: int(x[fecha]))
-	# Me quedo con los 4 que menos puntaje hicieron (van a salir del equipo)
-	menosPuntos = ordenPorFecha[:4]
-	return menosPuntos
-
-def transferencias(formacionActual, jugadoresMenosPuntaje, datos):
-
-	# Elijo 4 jugadores que van a entrar
-	for x in range(0,4):
-		# Selecciono un jugador de la lista de jugadores que menos puntaje
-		# hicieron en esa fecha
-		jugadorASacarEnPos = formacionActual.index(jugadoresMenosPuntaje[x])
-		# Lo saco del equipo
-		jugadorSuperado = formacionActual.pop(jugadorASacarEnPos)
-		# Le busco un reemplazo
-		reemplazo = datos[jugadorSuperado[1]][-1:]
-		# Saco al reemplazo de los posibles reemplazos		
-		datos[jugadorSuperado[1]] = datos[jugadorSuperado[1]][:-1]		
-		# Me fijo si el reemplazo ya estaba en el equipo, si es asi busco al siguiente
-		while reemplazo[0] in formacionActual:
-			datos[jugadorSuperado[1]] = datos[jugadorSuperado[1]][:-1]			
-			reemplazo = datos[jugadorSuperado[1]][-1:]
-
-		# Agrego al reemplazo al equipo
-		formacionActual += reemplazo
-		formacionActual.sort(key=lambda x: int(x[3]))
-
 def imprimirEquipo(equipo):
     print(equipo)
 
@@ -150,17 +72,17 @@ def imprimirEquipo(equipo):
     volantes = [x for x in equipo.jugadores if x["jugador"].posicion == "VOL" and x["titular"]]
 
     delanteros = [x for x in equipo.jugadores if x["jugador"].posicion == "DEL" and x["titular"]]
-
+    puntajetotal = 0
     print("Titulares")
-    for j in arqueros: print(j["jugador"])
-    for j in defensores: print(j["jugador"])
-    for j in volantes: print(j["jugador"])
-    for j in delanteros: print(j["jugador"])
+    for j in arqueros: print("{} {} {}".format(j["jugador"],j["jugador"].puntajes[equipo.fecha], ", Capitan" if j["capitan"] else ""))
+
+    for j in defensores: print("{} {} {}".format(j["jugador"],j["jugador"].puntajes[equipo.fecha], ", Capitan" if j["capitan"] else ""))
+    for j in volantes: print("{} {} {}".format(j["jugador"],j["jugador"].puntajes[equipo.fecha], ", Capitan" if j["capitan"] else ""))
+    for j in delanteros: print("{} {} {}".format(j["jugador"],j["jugador"].puntajes[equipo.fecha], ", Capitan" if j["capitan"] else ""))
     print()
     if(SUPLENTES_POR_PUESTO > 0) :
         print("Suplentes")
-        for j in [x for x in equipo.jugadores if x["titular"] == False]:
-            print(j["jugador"])
+        for j in [x for x in equipo.jugadores if x["titular"] == False]: print("{} {} {}".format(j["jugador"], j["jugador"].puntajes[equipo.fecha],", Capitan" if j["capitan"] else ""))
 
 def contarTransferencias ( previo, equipo):
     matches = 0
@@ -183,7 +105,7 @@ equipo = equipoIdeal(0, jugadores,SUPLENTES_POR_PUESTO)
 
 completarEquipo(equipo, jugadores, equipo.fecha+1)
 equipos.append(equipo)
-
+equipo.reordenarTitulares()
 formacionesPosibles = [Formacion(3, 4, 3, SUPLENTES_POR_PUESTO), Formacion(4, 4, 2, SUPLENTES_POR_PUESTO),Formacion(4, 3, 3, SUPLENTES_POR_PUESTO)]
 
 for x in range(1,FECHAS):
@@ -196,6 +118,7 @@ for x in range(1,FECHAS):
         equipo1.reordenarTitulares()
         #completo el equipo dsps de cambiar la formación ya que alguno quedó afuera sí o sí.
         completarEquipo(equipo1,jugadores,x)
+
 
         equipo1.mejorar(jugadores)
         equiposEnFecha.append(equipo1)

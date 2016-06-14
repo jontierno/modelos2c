@@ -32,11 +32,9 @@ class Equipo:
             return False
         # en otro caso lo agrego feliz.
         jug["jugador"] = jugador
+        jug["capitan"] = False
         self.jugadores.append(jug)
         self.cotizacion = self.cotizacion + jugador.cotizacion
-        if jug["titular"]:
-            self.puntaje = self.puntaje + jugador.puntajes[self.fecha]
-
         formacion.agregar(jugador.posicion)
         return True
 
@@ -107,10 +105,33 @@ class Equipo:
         return eq
 
     def reordenarTitulares(self):
-        jugadores = sorted(self.jugadores, key=lambda y: y["jugador"].sensibilidad[self.fecha], reverse=True)
+        jugadores = sorted(self.jugadores, key=lambda y: y["jugador"].puntajes[self.fecha], reverse=True)
         self.jugadores = []
         self.cotizacion = 0
         self.puntaje = 0
         self.formacion.reset()
         for j in jugadores:
             self.agregar(j["jugador"], True)
+        self.seleccionarCapitan()
+
+    def seleccionarCapitan(self):
+        for x in self.jugadores:
+            x["capitan"] = False
+        #tomo el jugador con mas puntos, le doy la capitania y ademas lo sumo doble en el puntaje final
+        jugadores = sorted(self.jugadores, key=lambda y: y["jugador"].puntajes[self.fecha], reverse=True)
+        for x in jugadores:
+            if x["titular"]:
+                x["capitan"] = True
+                break
+
+        self.calcularPuntaje()
+
+    def calcularPuntaje(self):
+        self.puntaje = 0
+        for x in self.jugadores:
+            if x["titular"]:
+                self.puntaje += x["jugador"].puntajes[self.fecha]
+            if x["capitan"]:
+                self.puntaje += x["jugador"].puntajes[self.fecha]
+
+
