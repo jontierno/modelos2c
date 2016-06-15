@@ -1,0 +1,74 @@
+
+
+* Ordenar por sensibilidad{n} siempre lo desempato por aparición en el equipo.
+
+* Un jugador no viola las Condiciones de equipo si al agregarlo:
+ 	- No supera el presupuesto máximo del equipo.
+ 	- No supera la cantidad de jugadores máximos para el mismo equipo.
+ 	- No supera la cantidad de jugadores para la posicón según la formación del equipo.
+
+* Un equipo lo considero completo cuando tiene todas las posiciones cubiertas incluidos los suplentes.
+
+
+
+* Reordenar Titulares(equipo, n):
+		Tomo los jugadores del equipo, los ordeno por puntaje{n}
+	por cada jugador
+		si no viola las condiciones de equipo y todavía hay espacio titular, lo marco como titular.
+		sino lo marco como suplente 
+		si viola condiciones de equipo lo quito del equipo.
+
+* Completo el equipo(jugadores, equipo, n, contadorTransferencias)
+	Ordeno los jugadores por sensibilidad{n}
+	Por cada jugador de la lista de jugadores hasta completar el equipo
+		si no viola las condiciones de quipo 
+			lo agrego y si no existía sumo uno a contadorTransferencias
+
+* Mejorar(jugadores, equipo, fecha, contadorTransferencias):
+	ordeno los jugadores por sensibilidad{fecha} descendentemente.
+	ordeno los jugadores del equipo por sensibilidad{fecha} ascendentemente
+
+	por cada jugador de la lista completa de jugadores 
+		si contadorTransferencias >= MAXIMO_TRANSFERENCIAS termino la iteración.
+		si el jugador ya existe en el equipo, salto al próximo.
+		por cada jugador del equipo
+			- si el jugador del equipo tiene la misma posición que el jugador de la lista
+				-Si no se violan las condiciones de equipo al intercambiar, intercambio, aumento el contador de transferencias y corto la iteración de los jugadores del equipo.
+
+
+
+Armado del primer equipo.
+
+- calculo la sensibilidad para cada jugador y cada fecha
+	
+	media = sumatoria(k = 1, FECHAS) [puntajes{k}]
+	M_k = media - sumatoria(n=0, k) mu * puntaje{n} / FECHAS
+	S_k = puntajes{k} + M_k
+
+
+- Ordeno los jugadores por sensibilidad{0} descendentemente.
+
+- Por cada tipo de formación (3-4-3, 4-4-2, 4-3-3)
+	- Por cada jugador y mientras no haya completado los 11 titulares:
+			Si todavía hay espacio en la formación para un titular en su puesto y no viola las condiciones de equipo
+				agrego al jugador al equipo. 
+
+- De los equipos armados anteriormente, me quedo con el que mas puntajes consigue.
+- ContadorTransferencias = 0
+- Completo el equipo(jugadores, equipo, 1, contadorTransferencias)
+
+- Reordeno los titulares (equipo,1)
+
+- Agrego el equipo como solucion a la fecha 1
+
+Armado del resto de los equipos.
+
+- para cada fecha f > 1
+	-para cada tipo de formación
+		- Copio la solución de la fecha anterior.
+		- contadorTransferencias = 0
+		- reordeno los titulares (equipo,f)
+		- completo el equipo(jugadores, equipo, f, contadorTransferencias)
+		- mejoro el equipo (equipo,jugadores, f, contadorTransferencias)
+		- reordeno los titulares (equipo,f)
+	De los equipos generados para cada formación, me quedo con el que mas puntaje obtuvo y lo agrego a la solución como equipo de la fecha f 

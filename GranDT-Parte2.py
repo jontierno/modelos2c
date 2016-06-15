@@ -25,8 +25,8 @@ def leerJugadores ():
 		for i in rows:
 			puntajes = []
 			for x in range(COLUMNA_FECHA_1, COLUMNA_FECHA_1+FECHAS):
-				puntajes.append(int(i[x]))
-			jugadores.append(Jugador(id, i[0], i[1], i[2], int(i[3]), puntajes))
+				puntajes.append(float(i[x]))
+			jugadores.append(Jugador(id, i[0], i[1], i[2], float(i[3]), puntajes))
 			id = id +1
 	return jugadores
 
@@ -73,6 +73,7 @@ def imprimirEquipo(equipo):
 
     delanteros = [x for x in equipo.jugadores if x["jugador"].posicion == "DEL" and x["titular"]]
     puntajetotal = 0
+    print("")
     print("Titulares")
     for j in arqueros: print("{} {} {}".format(j["jugador"],j["jugador"].puntajes[equipo.fecha], ", Capitan" if j["capitan"] else ""))
 
@@ -83,6 +84,7 @@ def imprimirEquipo(equipo):
     if(SUPLENTES_POR_PUESTO > 0) :
         print("Suplentes")
         for j in [x for x in equipo.jugadores if x["titular"] == False]: print("{} {} {}".format(j["jugador"], j["jugador"].puntajes[equipo.fecha],", Capitan" if j["capitan"] else ""))
+    print("-------------------------------------------------------------------------------------------------------------")
 
 def contarTransferencias ( previo, equipo):
     matches = 0
@@ -123,6 +125,7 @@ for x in range(1,FECHAS):
 
 
         equipo1.mejorar(jugadores)
+        equipo1.reordenarTitulares()
         equiposEnFecha.append(equipo1)
 
     # tomo el que mas puntos hizo

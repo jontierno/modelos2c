@@ -73,7 +73,6 @@ class Equipo:
                         self.transferencias += 1
                         break
 
-        self.reordenarTitulares()
 
 
     def __str__(self):
