@@ -134,3 +134,11 @@ class Equipo:
                 self.puntaje += x["jugador"].puntajes[self.fecha]
 
 
+    def hayTransferenciasDisponibles(self):
+        return self.transferencias < MAXIMO_TRANSFERENCIAS or self.fecha == 0
+
+    def quitarMasCaro(self):
+        jugadores = sorted(self.jugadores, key=lambda y: y["jugador"].cotizacion)
+        jug = jugadores.pop()
+        self.remover(jug)
+        return jug ["jugador"]

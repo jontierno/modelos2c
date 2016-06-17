@@ -56,10 +56,18 @@ def equipoIdeal(fecha, jugadores,suplentes):
 	#ordeno las formaciones y me quedo con la que obtuvo mas puntaje
 
 def completarEquipo(equipo, jugadores, fecha):
+    excluidos = []
     jugadores.sort(key=lambda y: y.sensibilidad[fecha], reverse=True)
-    for j in jugadores:
-        if not equipo.existe(j) and equipo.agregar(j, True):
-            equipo.transferencias +=1
+    while (equipo.formacion.hayAlgunEspacioDisponible() and equipo.hayTransferenciasDisponibles()):
+        for j in jugadores:
+            if j in excluidos:
+                continue
+            if not equipo.existe(j) and equipo.agregar(j, True):
+                equipo.transferencias +=1
+        if equipo.formacion.hayAlgunEspacioDisponible():
+            masCaro = equipo.quitarMasCaro()
+            excluidos.append(masCaro)
+
 
 def imprimirEquipo(equipo):
     print(equipo)

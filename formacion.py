@@ -61,3 +61,6 @@ class Formacion:
         self.disponibles["DEF"] = self.cupos["DEF"] + self.suplentesPorPuesto
         self.disponibles["VOL"] = self.cupos["VOL"] + self.suplentesPorPuesto
         self.disponibles["DEL"] = self.cupos["DEL"] + self.suplentesPorPuesto
+
+    def hayAlgunEspacioDisponible(self):
+        return self.hayDisponibles("ARQ") or self.hayDisponibles("DEF") or self.hayDisponibles("VOL") or self.hayDisponibles("DEL")
